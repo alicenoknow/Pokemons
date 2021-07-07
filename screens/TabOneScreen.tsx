@@ -51,16 +51,16 @@ const styles = StyleSheet.create({
 
   containerFav: {
     flex: 0,
+    margin: 10,
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 15
+    justifyContent: 'center'
   },
 
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 15
+    margin: 10
   },
 
   separator: {

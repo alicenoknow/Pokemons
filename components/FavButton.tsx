@@ -28,15 +28,13 @@ export default function FindPokemon() {
  
   const styles = StyleSheet.create({
     container: {
-      flexDirection: "row"
+      flexDirection: "row",
+      alignItems: 'center'
     },
     button: {
-      fontSize: 30,
-      backgroundColor: '#faf',
+      fontSize: 40,
       padding: 2,
-      width: '30%',
-      alignItems: 'center',
-      borderRadius: 5
+      width: '40%',
     },
   });
 

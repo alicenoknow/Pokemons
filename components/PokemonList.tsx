@@ -53,7 +53,7 @@ async function loadPokemonBatch(updatePokemonsList: addPokemonsType, url: string
     const pokemonsPromise = pokemonsUrl.map(pokemon => getPokemonInfo(pokemon));
     const pokemonsInfo = await Promise.all(pokemonsPromise);
     const newPokemons = pokemonsInfo.filter(isPokemonInfo);
-     updatePokemonsList(newPokemons)
+    updatePokemonsList(newPokemons)
 
   } catch (error) {
     console.log(error);
