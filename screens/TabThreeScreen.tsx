@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
-import FavButton from '../components/FavButton';
 import Title from '../components/Title';
 
 import { View, StyleSheet } from 'react-native';
@@ -25,37 +24,17 @@ export default function TabOneScreen() {
 
 
   return (
-    <View style={styles.containerMain}>
-      <View style={styles.containerFav}>
-        <FavButton/>
-      </View>
-      
-      <View style={styles.container}>      
-        <Title text="Find Pokemon "/>
-        <View style={styles.separator}/>
-        <FindPokemon onFindPress={downloadPokemonImage} onChangeUrl={setImageUrl}/>
-        <PokemonImage url={url} />
-      </View>
-    </View>
+    <View style={styles.container}>      
+      <Title text="Find Pokemon"/>
+      <View style={styles.separator}/>
+      <FindPokemon onFindPress={downloadPokemonImage} onChangeUrl={setImageUrl}/>
+      <PokemonImage url={url} />
+     </View>
  );
 }
 
 
 const styles = StyleSheet.create({
-  containerMain: {
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 15
-  },
-
-  containerFav: {
-    flex: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 15
-  },
-
   container: {
     flex: 1,
     alignItems: 'center',

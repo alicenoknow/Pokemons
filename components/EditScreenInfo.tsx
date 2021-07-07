@@ -45,8 +45,8 @@ export default function EditScreenInfo({ path }: { path: string }) {
 
 function handleHelpPress() {
   WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/get-started/create-a-new-app/#opening-the-app-on-your-phonetablet'
-  );
+    'https://pokeapi.co/'
+    );
 }
 
 const styles = StyleSheet.create({
@@ -76,5 +76,7 @@ const styles = StyleSheet.create({
   },
   helpLinkText: {
     textAlign: 'center',
+    backgroundColor: '#fafa',
+    padding: 15
   },
 });
