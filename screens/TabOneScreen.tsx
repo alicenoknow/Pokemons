@@ -6,6 +6,7 @@ import PokemonImage from '../components/PokemonImage';
 import FavButton from '../components/FavButton';
 import Title from '../components/Title';
 import { downloadPokemonImage } from '../utlis/api'
+import { initialStorage } from '../utlis/storage';
 
 
 export default function TabOneScreen() {
@@ -15,6 +16,7 @@ export default function TabOneScreen() {
 
 
   return (
+
     <View style={styles.containerMain}>
       <View style={styles.containerFav}>
         <FavButton name={name}/>

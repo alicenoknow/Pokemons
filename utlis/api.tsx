@@ -10,7 +10,9 @@ async function downloadPokemonImage(pokemonName: string, imageUrlCallback: (poke
     try {
     const response = await fetch(getPokemonUrl(pokemonName).url);
     const responseJson = await response.json();
-    imageUrlCallback(responseJson.sprites.front_default);
+    if (responseJson != undefined){
+      imageUrlCallback(responseJson.sprites.front_default);
+    }
     } catch (error) {
       console.log(error);
     }

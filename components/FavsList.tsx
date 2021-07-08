@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { View, FlatList, AsyncStorage, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import PokemonImage from './PokemonImage';
 import {getPokemonInfo, getPokemonUrl, isPokemonInfo} from '../utlis/api'
-import { PokemonInfo, PokemonJSONType } from '../types';
+import { getAllFromStorage } from '../utlis/storage';
+import { PokemonInfo } from '../types';
 import { useEffect } from 'react';
 
 type setPokemonsType = (pokemonInfo: PokemonInfo[]) => void;
@@ -17,21 +18,22 @@ export default function FavsList() {
 
   const onFindPress = () => {
     updateFavs(setPokemons);
+
   }
 
   return (
-    <View>
-      <TouchableOpacity
-            onPress={onFindPress}>
-        <Text >💙</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={pokemons}
-        renderItem={(pokemon) => (<PokemonImage url={pokemon.item.url} name={pokemon.item.name} />)}
-        keyExtractor={item => item.name}
-      />
-
-    </View>);
+      <View>
+        <TouchableOpacity
+              onPress={onFindPress}>
+          <Text >💙</Text>
+        </TouchableOpacity>
+        <FlatList
+          data={pokemons}
+          renderItem={(pokemon) => (<PokemonImage url={pokemon.item.url} name={pokemon.item.name} />)}
+          keyExtractor={item => item.name}
+        />
+      </View>
+    );
 }
 
 
@@ -54,13 +56,4 @@ async function updateFavs(setPokemons: setPokemonsType) {
     const favs = newPokemons.filter(isPokemonInfo);
     setPokemons(favs)
   }
-}
-
-async function getAllFromStorage() {
-  try {
-    return await AsyncStorage.getAllKeys();
-
-  } catch (error) {
-    console.error(error)
-  }
-}
+} 
