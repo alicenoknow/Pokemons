@@ -1,51 +1,22 @@
 import * as React from 'react';
-
-import FindPokemon from '../components/FindPokemon';
-import PokemonImage from '../components/PokemonImage';
-import Title from '../components/Title';
-
 import { View, StyleSheet } from 'react-native';
 
-async function downloadPokemonImage(pokemonName: string, imageUrlCallback: (pokemonImageUrl: string) => void) {
-  try {
-  const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemonName.toLowerCase());
-  const responseJson = await response.json();
-  imageUrlCallback(responseJson.sprites.front_default);
-  } catch (error) {
-    console.log(error);
-  }
-}
+import FavsList from '../components/FavsList';
 
 
-export default function TabOneScreen() {
-
-  const[url, setImageUrl] = React.useState('https://reactnative.dev/img/tiny_logo.png')
-  const[name, setName] = React.useState('')
-
+export default function TabTwoScreen() {
 
   return (
-    <View style={styles.container}>      
-      <Title text="Find Pokemon"/>
-      <View style={styles.separator}/>
-      <FindPokemon onFindPress={downloadPokemonImage} onChangeUrl={setImageUrl}/>
-      <PokemonImage url={url} />
-     </View>
- );
+    <View style={styles.container}>
+      <FavsList />
+    </View>
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 15
-  },
-
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%'
-  },
+  }
 });
-

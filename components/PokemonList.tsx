@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
-import {loadPokemonBatch, getPokemonInfo} from '../network/api'
+import {loadPokemonBatch} from '../utlis/api'
 import { PokemonInfo } from '../types';
 
 

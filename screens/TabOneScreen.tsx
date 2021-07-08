@@ -5,7 +5,7 @@ import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
 import FavButton from '../components/FavButton';
 import Title from '../components/Title';
-import { downloadPokemonImage } from '../network/api'
+import { downloadPokemonImage } from '../utlis/api'
 
 
 export default function TabOneScreen() {

@@ -1,4 +1,3 @@
-import { getInitialURL } from 'expo-linking';
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
 
@@ -8,10 +7,15 @@ interface FavButtonProps {
 
 export default function FindPokemon(props: FavButtonProps) {
 
+  const FavContext = React.createContext(getAllFromStorage());
+
+
   const onFindPress = () => {
-    const key = props.name.toLowerCase()
-    addToStorage(key, key);
-    getAllFromStorage();
+    if (props.name){ 
+      const key = props.name.toLowerCase()
+      addToStorage(key, key);
+      getAllFromStorage();
+    }
   }
 
     return (
