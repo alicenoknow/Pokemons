@@ -25,3 +25,16 @@ export type TabTwoParamList = {
 export type TabThreeParamList = {
   TabThreeScreen: undefined;
 };
+
+export interface PokemonJSONType {
+  url: string;
+  name?: string;
+  sprites?: {
+    front_default: string;
+  }
+}
+
+export interface PokemonInfo {
+  url: string;
+  name: string;
+}

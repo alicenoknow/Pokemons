@@ -5,7 +5,8 @@ type imageUrlCallback = (pokemonImageUrl: string) => void;
 
 interface FindButtonProps {
   onFindPress: (text: string, setter: imageUrlCallback) => void;
-  onChangeUrl: imageUrlCallback
+  onChangeUrl: imageUrlCallback;
+  onNameChange: (text: string) => void;
 }
 
 export default function FindPokemon(props: FindButtonProps) {
@@ -13,6 +14,7 @@ export default function FindPokemon(props: FindButtonProps) {
   const [text, setText] = React.useState('');
   const onFindPress = () => {
     props.onFindPress(text, props.onChangeUrl);
+    props.onNameChange(text);
   }
 
     return (

@@ -1,15 +1,9 @@
 import * as React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
+import {loadPokemonBatch, getPokemonInfo} from '../network/api'
+import { PokemonInfo } from '../types';
 
-
-type addPokemonsType = (newPokemons: ReadonlyArray<PokemonInfo>) => void;
-type updateUrlType = (newUrl: string) => void;
-
-interface PokemonInfo {
-  url: string;
-  name: string;
-}
 
 export default function PokemonList() {
 
@@ -32,43 +26,6 @@ export default function PokemonList() {
     </View>);
 }
 
-interface PokemonJSONType {
-  url: string;
-  name?: string;
-  sprites?: {
-    front_default: string;
-  }
-}
-
-function isPokemonInfo(pokemon: PokemonInfo | undefined): pokemon is PokemonInfo {
-  return pokemon !== undefined;
-}
-
-async function loadPokemonBatch(updatePokemonsList: addPokemonsType, url: string, setUrl: updateUrlType) {
-  try {
-    const responseList = await fetch(url);
-    const responseJsonList = await responseList.json();
-    setUrl(responseJsonList.next)
-    const pokemonsUrl: PokemonJSONType[] = responseJsonList.results
-    const pokemonsPromise = pokemonsUrl.map(pokemon => getPokemonInfo(pokemon));
-    const pokemonsInfo = await Promise.all(pokemonsPromise);
-    const newPokemons = pokemonsInfo.filter(isPokemonInfo);
-    updatePokemonsList(newPokemons)
-
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-async function getPokemonInfo(pokemon: PokemonJSONType): Promise<PokemonInfo | undefined> {
-  try {
-    const responseImage = await fetch(pokemon.url);
-    const responseJsonImage = await responseImage.json();
-    return { name: responseJsonImage.name, url: responseJsonImage.sprites.front_default }
-  } catch (error) {
-    console.log(error);
-  }
-}
 
 const styles = StyleSheet.create({
   pokemon: {

@@ -1,22 +1,21 @@
+import { getInitialURL } from 'expo-linking';
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
 
-type imageUrlCallback = (pokemonImageUrl: string) => void;
-
-interface FindButtonProps {
-  onFindPress: (text: string, setter: imageUrlCallback) => void;
-  onChangeUrl: imageUrlCallback
+interface FavButtonProps {
+  name: string;
 }
 
-export default function FindPokemon() {
+export default function FindPokemon(props: FavButtonProps) {
 
-  const [text, setText] = React.useState('');
   const onFindPress = () => {
-   
+    const key = props.name.toLowerCase()
+    addToStorage(key, key);
+    getAllFromStorage();
   }
 
     return (
-      <View style={styles.container}>
+      <View>
         <TouchableOpacity
             style={styles.button}
             onPress={onFindPress}>
@@ -27,10 +26,6 @@ export default function FindPokemon() {
   }
  
   const styles = StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      alignItems: 'center'
-    },
     button: {
       fontSize: 40,
       padding: 2,
@@ -38,3 +33,42 @@ export default function FindPokemon() {
     },
   });
 
+
+async function addToStorage(newKey: string, newValue: string) {
+  try {
+    const value = await AsyncStorage.getItem(newKey);
+    if (value !== null) {
+      Alert.alert(newKey + " already in your favs");
+    }
+    else {
+      await AsyncStorage.setItem(newKey, newValue);
+      Alert.alert(newKey + " added to your favs");
+      
+    }
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function getFromStorage(key: string) {
+  try {
+    const value = await AsyncStorage.getItem('TASKS');
+    if (value !== null) {
+      console.log(value);
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+async function getAllFromStorage() {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+
+    keys.map(req => console.log(req));
+
+  } catch (error) {
+    console.error(error)
+  }
+}
