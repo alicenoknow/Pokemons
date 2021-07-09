@@ -1,15 +1,18 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { AsyncStorage } from "react-native";
-import { initialStorage } from "../utlis/storage";
+import { addToStorage, initialStorage } from "../utlis/storage";
 
-const FavContext = createContext<{pokemons: string[], addPokemon?: (pokemon: string) => void}>({pokemons: []});
+const FavContext = createContext<{pokemons: string[], addPokemon: (pokemon: string) => void}>({pokemons: [], addPokemon: () => {}});
 
 export const useFavContext = () => useContext(FavContext);
 
 export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
   const [pokemons, setPokemons] = useState<string[]>([]);
 
-  const addPokemon = (pokemon: string) => setPokemons([...pokemons, pokemon]);
+  const addPokemon = (pokemon: string) => {
+    setPokemons([...pokemons, pokemon]);
+    addToStorage(pokemon, pokemon);
+  }
 
   useEffect(() => {
       async function loadPokemons() {

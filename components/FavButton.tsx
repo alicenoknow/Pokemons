@@ -12,23 +12,19 @@ export default function FindPokemon(props: FavButtonProps) {
 
   const { pokemons, addPokemon } = useFavContext();
 
-
   const onFindPress = async () => {
     if (props.name){ 
       const key = props.name.toLowerCase();
-      addToStorage(key, key);
-      console.log("aaa " + pokemons)
+      addPokemon(key);
     }
   }
 
     return (
-        <React.Fragment>
           <TouchableOpacity
               style={styles.button}
               onPress={onFindPress}>
             <Text style={styles.button}>💙</Text>
           </TouchableOpacity>
-        </React.Fragment>
     );
   }
  
@@ -36,6 +32,5 @@ export default function FindPokemon(props: FavButtonProps) {
     button: {
       fontSize: 40,
       padding: 2,
-      width: '40%',
     },
   });

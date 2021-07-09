@@ -1,35 +1,39 @@
 import * as React from 'react';
 import { View, FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import PokemonImage from './PokemonImage';
-import {getPokemonInfo, getPokemonUrl, isPokemonInfo} from '../utlis/api'
+import {getPokemonInfo, getPokemonUrl, getPokmeonInfoFromName, isPokemonInfo} from '../utlis/api'
 import { getAllFromStorage } from '../utlis/storage';
 import { PokemonInfo } from '../types';
 import { useEffect } from 'react';
+import { useFavContext } from './Favs';
+import { useState } from 'react';
 
 type setPokemonsType = (pokemonInfo: PokemonInfo[]) => void;
 
-export default function FavsList() {
+function filterUndefinedPokemonObjects(pokemonObject: PokemonInfo | undefined): pokemonObject is PokemonInfo {
+  return pokemonObject !== undefined;
+}
 
-  const [pokemons, setPokemons] = React.useState<ReadonlyArray<PokemonInfo>>([]);
+export default function FavsList() {
+  const [pokemonObjects, setPokemonObjects] = useState<PokemonInfo[]>([]);
+
+  const { pokemons, addPokemon } = useFavContext();
 
   useEffect(() => {
-    updateFavs(setPokemons);
-  }, [])
-
-  const onFindPress = () => {
-    updateFavs(setPokemons);
-
-  }
+    async function loadPokemonObjects() {
+      const pokemonObjectFetch = pokemons.map(getPokmeonInfoFromName);
+      const newPokemonObjects = await Promise.all(pokemonObjectFetch);
+      const pokemonsToRender = newPokemonObjects.filter(filterUndefinedPokemonObjects);
+      setPokemonObjects(pokemonsToRender);
+    }
+    loadPokemonObjects();
+  }, [pokemons])
 
   return (
       <View>
-        <TouchableOpacity
-              onPress={onFindPress}>
-          <Text >💙</Text>
-        </TouchableOpacity>
         <FlatList
-          data={pokemons}
-          renderItem={(pokemon) => (<PokemonImage url={pokemon.item.url} name={pokemon.item.name} />)}
+          data={pokemonObjects}
+          renderItem={({item}) => renderPokemon(item)}
           keyExtractor={item => item.name}
         />
       </View>
@@ -57,3 +61,7 @@ async function updateFavs(setPokemons: setPokemonsType) {
     setPokemons(favs)
   }
 } 
+
+const renderPokemon = (pokemonObject: PokemonInfo) => {
+    return <PokemonImage url={pokemonObject.url} name={pokemonObject.name} />
+}

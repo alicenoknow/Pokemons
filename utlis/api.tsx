@@ -1,7 +1,7 @@
 import { PokemonInfo, PokemonJSONType } from "../types";
 
 
-export { downloadPokemonImage, loadPokemonBatch, getPokemonInfo, isPokemonInfo, getPokemonUrl,} ;
+export { downloadPokemonImage, loadPokemonBatch, getPokemonInfo, isPokemonInfo, getPokmeonInfoFromName, getPokemonUrl,} ;
 
 type addPokemonsType = (newPokemons: ReadonlyArray<PokemonInfo>) => void;
 type updateUrlType = (newUrl: string) => void;
@@ -54,3 +54,8 @@ function getPokemonUrl(pokemonName: string): PokemonJSONType {
     }
   }
 
+function getPokmeonInfoFromName(name: string) {
+  const pokemonJSON = getPokemonUrl(name);
+  const pokemonInfo = getPokemonInfo(pokemonJSON)
+  return pokemonInfo;
+}
