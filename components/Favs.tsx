@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AsyncStorage } from "react-native";
+import { Alert } from "react-native";
 import { addToStorage, initialStorage } from "../utlis/storage";
 
 const FavContext = createContext<{pokemons: string[], addPokemon: (pokemon: string) => void}>({pokemons: [], addPokemon: () => {}});
@@ -10,8 +10,14 @@ export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
   const [pokemons, setPokemons] = useState<string[]>([]);
 
   const addPokemon = (pokemon: string) => {
-    setPokemons([...pokemons, pokemon]);
-    addToStorage(pokemon, pokemon);
+    if (pokemons.includes(pokemon)) {
+      Alert.alert(pokemon + ' already in your favs');
+      return;
+    }
+    const newPokemons = [...pokemons, pokemon];
+    setPokemons(newPokemons);
+    addToStorage(newPokemons);
+    Alert.alert(pokemon + ' added to your favs');
   }
 
   useEffect(() => {
@@ -23,7 +29,7 @@ export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
   }, [])
 
   return (
-    <FavContext.Provider value={{ pokemons, addPokemon}}>
+    <FavContext.Provider value={{ pokemons, addPokemon }}>
       {children}
     </FavContext.Provider>
   );

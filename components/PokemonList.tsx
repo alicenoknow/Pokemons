@@ -5,6 +5,7 @@ import {loadPokemonBatch} from '../utlis/api'
 import { PokemonInfo } from '../types';
 
 
+
 export default function PokemonList() {
 
   const [url, setUrl] = React.useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10");

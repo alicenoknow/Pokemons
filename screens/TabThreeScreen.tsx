@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-
 import FavsList from '../components/FavsList';
 
-
-export default function TabTwoScreen() {
+export default function TabThreeScreen() {
 
   return (
     <View style={styles.container}>

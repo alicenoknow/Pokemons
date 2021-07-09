@@ -1,31 +1,26 @@
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
-export async function addToStorage(newKey: string, newValue: string) {
-    try {
-      const value = await AsyncStorage.getItem(newKey);
-      if (value !== null) {
-        Alert.alert(newKey + " already in your favs");
-      }
-      else {
-        await AsyncStorage.setItem(newKey, newValue);
-        Alert.alert(newKey + " added to your favs");
-        
-      }
-  
-    } catch (error) {
-      console.log(error)
-    }
-  }
+const FAV_POKEMONS = 'FavPokemons'
 
-export async function getAllFromStorage() {
-    try {
-      const keys = await AsyncStorage.getAllKeys();
-      return keys;
-  
-    } catch (error) {
-      console.error(error)
-    }
+export async function addToStorage(newPokemonsValue: ReadonlyArray<string>) {
+  try {
+    await AsyncStorage.setItem(FAV_POKEMONS, JSON.stringify(newPokemonsValue));
+  } catch (error) {
+    console.log(error)
   }
+}
+
+async function getAllFromStorage(): Promise<string[]> {
+  try {
+    const pokemonListString = await AsyncStorage.getItem(FAV_POKEMONS);
+    if (pokemonListString !== null) {
+      return JSON.parse(pokemonListString) as string[];
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return [];
+}
 
 export async function initialStorage() {
   const allKeys = await getAllFromStorage();

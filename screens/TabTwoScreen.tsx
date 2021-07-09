@@ -7,7 +7,7 @@ import PokemonList from '../components/PokemonList';
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <PokemonList />
+      <PokemonList/>
     </View>
   );
 }

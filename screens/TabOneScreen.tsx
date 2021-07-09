@@ -1,17 +1,14 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-
 import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
 import FavButton from '../components/FavButton';
 import Title from '../components/Title';
-import { downloadPokemonImage } from '../utlis/api'
-import { initialStorage } from '../utlis/storage';
-
+import {getPokemonImageUrl } from '../utlis/api'
 
 export default function TabOneScreen() {
 
-  const[url, setImageUrl] = React.useState('https://reactnative.dev/img/tiny_logo.png')
+  const[url, setImageUrl] = React.useState('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png')
   const[name, setName] = React.useState('')
 
 
@@ -25,8 +22,8 @@ export default function TabOneScreen() {
       <View style={styles.container}>      
         <Title text="Find Pokemon "/>
         <View style={styles.separator}/>
-        <FindPokemon onFindPress={downloadPokemonImage} onChangeUrl={setImageUrl} onNameChange={setName}/>
-        <PokemonImage url={url} />
+        <FindPokemon onFindPress={getPokemonImageUrl} onChangeUrl={setImageUrl} onNameChange={setName}/>
+        <PokemonImage url={url} name='' />
       </View>
     </View>
  );

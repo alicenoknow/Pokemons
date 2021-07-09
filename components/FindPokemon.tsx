@@ -4,7 +4,7 @@ import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 type imageUrlCallback = (pokemonImageUrl: string) => void;
 
 interface FindButtonProps {
-  onFindPress: (text: string, setter: imageUrlCallback) => void;
+  onFindPress: (text: string) => Promise<string>;
   onChangeUrl: imageUrlCallback;
   onNameChange: (text: string) => void;
 }
@@ -13,7 +13,11 @@ export default function FindPokemon(props: FindButtonProps) {
 
   const [text, setText] = React.useState('');
   const onFindPress = () => {
-    props.onFindPress(text, props.onChangeUrl);
+    async function setUrl() {
+      const imageUrl = await props.onFindPress(text);
+      props.onChangeUrl(imageUrl);
+    }
+    setUrl();
     props.onNameChange(text);
   }
 
@@ -40,12 +44,12 @@ export default function FindPokemon(props: FindButtonProps) {
     },
     input: {
       width: '40%',
-      color: '#faf',
+      color: '#aad',
       padding: 10
     },
     button: {
       fontSize: 10,
-      backgroundColor: '#faf',
+      backgroundColor: '#acf',
       padding: 10,
       marginLeft: 20,
       width: '30%',
