@@ -18,7 +18,7 @@ export default function PokemonList() {
     <View>
       <FlatList
         data={pokemons}
-        renderItem={(pokemon) => (<PokemonImage url={pokemon.item.url} name={pokemon.item.name} />)}
+        renderItem={({ item }) => renderPokemon(item)}
         onEndReachedThreshold={0.4}
         onEndReached={() => loadPokemonBatch(addPokemons, url, setUrl)}
         keyExtractor={item => item.name}
@@ -27,6 +27,23 @@ export default function PokemonList() {
     </View>);
 }
 
+
+const renderPokemon = (pokemonObject: PokemonInfo) => {
+  const styles = StyleSheet.create({
+    separator: {
+      height: 1,
+      width: 250,
+      backgroundColor: "#3337"
+    },
+  });
+
+  return ( 
+    <>
+     <PokemonImage url={pokemonObject.url} name={pokemonObject.name}nameToRender={pokemonObject.name} />
+     <View style={styles.separator}/>
+    </>
+  );
+}
 
 const styles = StyleSheet.create({
   pokemon: {

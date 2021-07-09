@@ -69,6 +69,11 @@ function TabOneNavigator() {
         component={TabOneScreen}
         options={{ headerTitle: 'Find' }}
       />
+      <TabOneStack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{ headerTitle: 'Details' }}
+      />
     </TabOneStack.Navigator>
   );
 }
@@ -102,6 +107,11 @@ function TabThreeNavigator() {
         name="TabThreeScreen"
         component={TabThreeScreen}
         options={{ headerTitle: 'Favs' }}
+      />
+      <TabThreeStack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{ headerTitle: 'Details' }}
       />
     </TabThreeStack.Navigator>
   );

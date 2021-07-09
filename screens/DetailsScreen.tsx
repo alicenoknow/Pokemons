@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PokemonDetails from '../components/PokemonDetails';
+import { NavigatorScreenParams } from '@react-navigation/native';
 
-export default function DetailsScreen() {
-
-  return (
-    <View style={styles.containerMain}>
-      <Text>twojastaratokopara</Text>
-      {/* <PokemonDetails name='pikachu'/> */}
-    </View>
- );
+// TODO types https://reactnavigation.org/docs/typescript
+export default function DetailsScreen({ route }: any) {
+    if (route.params.name)
+        return ( 
+            <View style={styles.containerMain}>
+                <PokemonDetails name={route.params.name}/>
+            </View>
+            );
+    else {
+        return (<Text style={styles.text}>ajaj</Text>);
+    }
 }
-
 
 const styles = StyleSheet.create({
   containerMain: {
@@ -19,24 +22,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 15
   },
-
-  containerFav: {
-    flex: 0,
-    margin: 10,
-    alignItems: 'flex-end',
-  },
-
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10
-  },
-
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%'
-  },
+  text: {
+    fontSize: 40,
+    fontWeight: 'bold',
+  }
 });
 

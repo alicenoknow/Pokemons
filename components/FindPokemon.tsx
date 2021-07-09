@@ -44,7 +44,6 @@ export default function FindPokemon(props: FindButtonProps) {
     },
     input: {
       width: '40%',
-      color: '#aad',
       padding: 10
     },
     button: {

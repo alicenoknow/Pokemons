@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
 import { getPokmeonInfoFromName, isPokemonInfo } from '../utlis/api'
 import { PokemonInfo } from '../types';
@@ -34,5 +34,18 @@ export default function FavsList() {
 }
 
 const renderPokemon = (pokemonObject: PokemonInfo) => {
-  return <PokemonImage url={pokemonObject.url} name={pokemonObject.name} />
+  const styles = StyleSheet.create({
+    separator: {
+      height: 1,
+      width: 250,
+      backgroundColor: "#3337"
+    },
+  });
+
+  return ( 
+    <>
+     <PokemonImage url={pokemonObject.url} name={pokemonObject.name}nameToRender={pokemonObject.name} />
+     <View style={styles.separator}/>
+    </>
+  );
 }

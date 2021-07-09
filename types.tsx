@@ -16,6 +16,7 @@ export type BottomTabParamList = {
 
 export type TabOneParamList = {
   TabOneScreen: undefined;
+  DetailsScreen: undefined;
 };
 
 export type TabTwoParamList = {
@@ -25,6 +26,7 @@ export type TabTwoParamList = {
 
 export type TabThreeParamList = {
   TabThreeScreen: undefined;
+  DetailsScreen: undefined;
 };
 
 export interface PokemonJSONType {

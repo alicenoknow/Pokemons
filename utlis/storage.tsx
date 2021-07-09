@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 
 const FAV_POKEMONS = 'FavPokemons'
 
-export async function addToStorage(newPokemonsValue: ReadonlyArray<string>) {
+export async function updateStorage(newPokemonsValue: ReadonlyArray<string>) {
   try {
     await AsyncStorage.setItem(FAV_POKEMONS, JSON.stringify(newPokemonsValue));
   } catch (error) {
@@ -25,4 +25,8 @@ async function getAllFromStorage(): Promise<string[]> {
 export async function initialStorage() {
   const allKeys = await getAllFromStorage();
   return allKeys ?? [];
+}
+
+export function inFavs(name: string) {
+
 }
