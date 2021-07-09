@@ -25,7 +25,6 @@ export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
       const index = pokemons.indexOf(pokemon);
       if (index > -1) {
         pokemons.splice(index, 1);
-        console.log(pokemons)
         setPokemons(pokemons)
         updateStorage(pokemons);
         Alert.alert(pokemon + ' removed from your favs');

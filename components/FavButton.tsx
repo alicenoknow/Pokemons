@@ -34,7 +34,6 @@ export default function FindPokemon(props: FavButtonProps) {
         style={styles.button}
         onPress={onFindPressRemove}>
         <Text style={styles.button}>💔</Text>
-  
       </TouchableOpacity>
     );
   }
@@ -52,7 +51,7 @@ export default function FindPokemon(props: FavButtonProps) {
 
 const styles = StyleSheet.create({
   button: {
-    fontSize: 30,
+    fontSize: 40,
     padding: 2,
   },
 });

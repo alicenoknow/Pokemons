@@ -22,10 +22,7 @@ export default function PokemonImage(props: PokemonImageProps) {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={onPress}>
-        <View style={styles.upperContainer}>
-          <Text style={styles.name}>{props.nameToRender}</Text>
-          <FavButton name={props.name}/>
-        </View>
+        <Text style={styles.name}>{props.nameToRender}</Text>
         <Image
           style={styles.pokemon}
           source={{ uri: props.url }} />

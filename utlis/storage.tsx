@@ -26,7 +26,3 @@ export async function initialStorage() {
   const allKeys = await getAllFromStorage();
   return allKeys ?? [];
 }
-
-export function inFavs(name: string) {
-
-}
