@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
+import PokemonAnimation from '../components/Animation';
 import FavButton from '../components/FavButton';
 import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
@@ -9,6 +10,7 @@ export default function TabOneScreen() {
 
   const[url, setImageUrl] = React.useState('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png')
   const[name, setName] = React.useState('')
+
 
   return (
     <>
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
     flex: 0,
     margin: 50,
     alignItems: 'flex-end'
-  }
+  },
+  
 });
 
