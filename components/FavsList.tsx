@@ -28,24 +28,28 @@ export default function FavsList() {
         data={pokemonObjects}
         renderItem={({ item }) => renderPokemon(item)}
         keyExtractor={item => item.name}
+        ItemSeparatorComponent={renderSeparator}
       />
     </View>
   );
 }
 
 const renderPokemon = (pokemonObject: PokemonInfo) => {
-  const styles = StyleSheet.create({
-    separator: {
-      height: 1,
-      width: 250,
-      backgroundColor: "#3337"
-    },
-  });
-
   return ( 
-    <>
-     <PokemonImage url={pokemonObject.url} name={pokemonObject.name}nameToRender={pokemonObject.name} />
-     <View style={styles.separator}/>
-    </>
+   <PokemonImage url={pokemonObject.url} name={pokemonObject.name}nameToRender={pokemonObject.name} />
   );
 }
+
+const renderSeparator = () => {
+  return (
+    <View style={styles.separator}/>
+  );
+}
+
+const styles = StyleSheet.create({
+  separator: {
+    height: 1,
+    width: 250,
+    backgroundColor: "#3337"
+  }
+});

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import PokemonAnimation from '../components/Animation';
 import FavButton from '../components/FavButton';
 import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
@@ -26,8 +25,7 @@ export default function TabOneScreen() {
 }
 
 const styles = StyleSheet.create({
-  containerMain: {
-    flex: 1,
+  containerMain: {  
     justifyContent: 'center',
     alignItems: 'center',
     margin: 15

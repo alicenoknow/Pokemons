@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { useCallback } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import PokemonAnimation from './Animation';
+import { NotFoundAnimation } from './NotFoundAnimation';
 
 interface PokemonImageProps {
   url: string;
@@ -32,13 +32,12 @@ export default function PokemonImage(props: PokemonImageProps) {
   }
   else {
     return (
-      <>
+      <View style={styles.container}>
         <View style={styles.animationContainer}>
-          <PokemonAnimation source={require('../assets/animations/squirtle.json')} />
-          <PokemonAnimation source={require('../assets/animations/diglett.json')} speed={2.307}/>
+          <NotFoundAnimation />
         </View>
-        <Text>Pokemon {props.name} does not exist :c</Text>
-      </>
+        <Text style={styles.name} >Pokemon {props.name} does not exist :c</Text>
+      </View>
     );
   }
 }
@@ -46,7 +45,7 @@ export default function PokemonImage(props: PokemonImageProps) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    margin: 20
+    justifyContent: 'center'
   },
   pokemon: {
     width: 180,
@@ -70,9 +69,7 @@ const styles = StyleSheet.create({
   animationContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'row',
-    margin: 20
-  }
+  },
 
 });
 

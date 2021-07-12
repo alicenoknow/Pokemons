@@ -1,43 +1,27 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { useRef } from 'react';
-import { useEffect } from 'react';
+
+export { PokemonAnimation }
 
 interface AnimationProps {
   source: any,
-  speed?: number,
+  ref: any,
+  rotation: string,
+  size: number
 }
 
-export default function PokemonAnimation(props: AnimationProps) {
-  
-  var animation: any = useRef();
-
-  useEffect(() => {
-    animation.play();
-  }, []);
-
-    return (
-      <View style={styles.animationContainer}>
+const PokemonAnimation = React.forwardRef((props: AnimationProps, ref: any) => {
+  return (
         <LottieView
-          ref={newAnimation => {
-            animation = newAnimation;
-          }}
-          style={{
-            width: 160,
-            height: 160,
-          }}
+          ref={ref}
           source={props.source}
-          speed={props.speed}
+          loop={false}
+          style={{
+              width: props.size,
+              height: props.size,
+              transform: [{ rotate: props.rotation}]
+          }}
+          autoPlay={true}
         />
-      </View>
-    );
-  }
-
-const styles = StyleSheet.create({
-  animationContainer: {
-    alignItems: 'center',
-    margin: 20,
-  },
-
-});
+  );
+  })
