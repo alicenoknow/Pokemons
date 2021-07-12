@@ -22,13 +22,12 @@ export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
 
   const removePokemon = (pokemon: string) => {
     if (pokemons.includes(pokemon)) {
-      const index = pokemons.indexOf(pokemon);
-      if (index > -1) {
-        pokemons.splice(index, 1);
-        setPokemons(pokemons)
-        updateStorage(pokemons);
-        Alert.alert(pokemon + ' removed from your favs');
-      }
+      const newPokemons = pokemons.filter(e => e !== pokemon)
+      console.log(newPokemons);
+      setPokemons(newPokemons);
+      updateStorage(newPokemons);
+      Alert.alert(pokemon + ' removed from your favs');
+      
     }
   }
 

@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { useCallback } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import FavButton from './FavButton';
 
 interface PokemonImageProps {
   url: string;
