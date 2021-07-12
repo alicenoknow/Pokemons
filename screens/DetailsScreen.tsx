@@ -1,14 +1,18 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PokemonDetails from '../components/PokemonDetails';
-import { NavigatorScreenParams } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
+
+interface DetailsScreenProps {
+  route: RouteProp<{ params: { name: string } }, 'params'>;
+}
 
 // TODO types https://reactnavigation.org/docs/typescript
-export default function DetailsScreen({ route }: any) {
-    if (route.params.name)
+export default function DetailsScreen(props: DetailsScreenProps) {
+    if (props.route.params.name)
         return ( 
             <View style={styles.containerMain}>
-                <PokemonDetails name={route.params.name}/>
+                <PokemonDetails name={props.route.params.name}/>
             </View>
             );
     else {
@@ -27,4 +31,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   }
 });
-

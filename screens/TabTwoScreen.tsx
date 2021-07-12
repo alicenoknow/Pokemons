@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-
 import PokemonList from '../components/PokemonList';
-
 
 export default function TabTwoScreen() {
   return (

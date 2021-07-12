@@ -22,12 +22,10 @@ export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
 
   const removePokemon = (pokemon: string) => {
     if (pokemons.includes(pokemon)) {
-      const newPokemons = pokemons.filter(e => e !== pokemon)
-      console.log(newPokemons);
+      const newPokemons = pokemons.filter(p => p !== pokemon)
       setPokemons(newPokemons);
       updateStorage(newPokemons);
       Alert.alert(pokemon + ' removed from your favs');
-      
     }
   }
 
