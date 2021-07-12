@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useFavContext } from './Favs';
 
 interface FavButtonProps {

@@ -1,12 +1,17 @@
-import React, { createRef } from 'react';
+import React, { createRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
-import { PokemonAnimation } from './Animation';
+import { PokemonAnimation } from './PokemonAnimation';
 
-export const NotFoundAnimation = React.forwardRef((props, ref) => {
+interface AnimationProps {
+    clicked: boolean | undefined;
+    setClicked: ((click: boolean) => void) | undefined;
+}
+
+export const NotFoundAnimation = React.forwardRef((props: AnimationProps, ref) => {
   
     const refsNum = 9;
-    const [elRefs, setElRefs] = React.useState([]);
+    const [elRefs, setElRefs] = useState([]);
 
     React.useEffect(() => {
         setElRefs(elRefs => (
@@ -18,10 +23,14 @@ export const NotFoundAnimation = React.forwardRef((props, ref) => {
       elRefs.forEach((ref: any) => {
         const anim = ref.current;
         if (anim) {
+            anim.reset();
             anim.play();
         }
       })
-  }, []);
+      if (props.setClicked !== undefined) {
+        props.setClicked(false);
+      }
+  }, [props.clicked]);
 
   const styles = StyleSheet.create({  
     row1: {

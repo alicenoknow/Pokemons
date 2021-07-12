@@ -8,6 +8,8 @@ interface PokemonImageProps {
   url: string;
   name: string;
   nameToRender?: string;
+  clicked?: boolean;
+  setClick?: (click: boolean) => void;
 }
 
 export default function PokemonImage(props: PokemonImageProps) {
@@ -34,7 +36,7 @@ export default function PokemonImage(props: PokemonImageProps) {
     return (
       <View style={styles.container}>
         <View style={styles.animationContainer}>
-          <NotFoundAnimation />
+          <NotFoundAnimation clicked={props.clicked} setClicked={props.setClick}/>
         </View>
         <Text style={styles.name} >Pokemon {props.name} does not exist :c</Text>
       </View>

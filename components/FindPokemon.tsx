@@ -7,6 +7,7 @@ interface FindButtonProps {
   onFindPress: (text: string) => Promise<string>;
   onChangeUrl: imageUrlCallback;
   onNameChange: (text: string) => void;
+  setClick: (clicked: boolean) => void;
 }
 
 export default function FindPokemon(props: FindButtonProps) {
@@ -18,6 +19,7 @@ export default function FindPokemon(props: FindButtonProps) {
       props.onChangeUrl(imageUrl);
     }
     setUrl();
+    props.setClick(true);
     props.onNameChange(text);
   }
 
@@ -35,6 +37,7 @@ export default function FindPokemon(props: FindButtonProps) {
             <Text>Find</Text>
           </TouchableOpacity>
       </View>
+      
     );
   }
 

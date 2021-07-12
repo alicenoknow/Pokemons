@@ -16,7 +16,9 @@ export default function DetailsScreen(props: DetailsScreenProps) {
             </View>
             );
     else {
-        return (<Text style={styles.text}>ajaj</Text>);
+        return (
+        <Text style={styles.text}>ajaj</Text>
+        );
     }
 }
 
