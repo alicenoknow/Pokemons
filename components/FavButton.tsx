@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Animated from 'react-native-reanimated';
 import { useFavContext } from './Favs';
 
 interface FavButtonProps {
@@ -29,7 +28,7 @@ export default function FindPokemon(props: FavButtonProps) {
     return pokemons.includes(name.toLowerCase());
   }
 
-  if (inFavs(props.name)){
+  if (inFavs(props.name)) {
     return (
       <TouchableOpacity
         style={styles.button}

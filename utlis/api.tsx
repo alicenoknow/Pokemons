@@ -1,22 +1,9 @@
-import { PokemonInfo, PokemonJSONType } from "../types";
+import { PokemonDetailsType, PokemonInfo, PokemonJSONType } from "../types";
 
-export { getPokemonDetails, getPokemonImageUrl, loadPokemonBatch, getPokemonInfo, isPokemonInfo, getPokmeonInfoFromName, getPokemonUrl, };
+export { getPokemonDetails, loadPokemonBatch, getPokemonInfo, isPokemonInfo, getPokmeonInfoFromName, getPokemonUrl, };
 
 type addPokemonsType = (newPokemons: ReadonlyArray<PokemonInfo>) => void;
 type updateUrlType = (newUrl: string) => void;
-
-async function getPokemonImageUrl(pokemonName: string): Promise<string> {
-  try {
-    const response = await fetch(getPokemonUrl(pokemonName).url);
-    const responseJson = await response.json();
-    if (responseJson !== undefined) {
-      return responseJson.sprites.front_default;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-  return '';
-}
 
 function isPokemonInfo(pokemon: PokemonInfo | undefined): pokemon is PokemonInfo {
   return pokemon !== undefined;
@@ -60,11 +47,11 @@ function getPokmeonInfoFromName(name: string) {
   return pokemonInfo;
 }
 
-async function getPokemonDetails(name: string) {
+async function getPokemonDetails(name: string): Promise<PokemonDetailsType | undefined> {
   try {
     const response = await fetch(getPokemonUrl(name).url);
     const responseJson = await response.json();
-    return { type: responseJson.types[0].type.name, imageUrl: responseJson.sprites.front_default, baseExperience: responseJson.base_experience }
+    return { type: responseJson.types[0].type.name, url: responseJson.sprites.front_default, baseExperience: responseJson.base_experience }
   } catch (error) {
     console.log(error);
   }

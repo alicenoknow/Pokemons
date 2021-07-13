@@ -37,20 +37,14 @@ export default function FavsList() {
 }
 
 const renderPokemon = (pokemonObject: PokemonInfo) => {
-  return ( 
-   <PokemonImage url={pokemonObject.url} name={pokemonObject.name}nameToRender={pokemonObject.name} />
+  return (
+    <PokemonImage url={pokemonObject.url} name={pokemonObject.name} nameToRender={pokemonObject.name} />
   );
 }
 
 const renderSeparator = () => {
   return (
-    <View style={styles.separator}/>
-  );
-}
-
-const emptyFavs = () => {
-  return (
-    <Text style={styles.text}>You have no fav pokemons :c</Text>
+    <View style={styles.separator} />
   );
 }
 

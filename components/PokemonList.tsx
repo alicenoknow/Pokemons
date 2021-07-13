@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
-import {loadPokemonBatch} from '../utlis/api'
+import { loadPokemonBatch } from '../utlis/api'
 import { PokemonInfo } from '../types';
-
-
 
 export default function PokemonList() {
 
@@ -30,14 +28,14 @@ export default function PokemonList() {
 
 
 const renderPokemon = (pokemonObject: PokemonInfo) => {
-  return ( 
-    <PokemonImage url={pokemonObject.url} name={pokemonObject.name}nameToRender={pokemonObject.name} />
+  return (
+    <PokemonImage url={pokemonObject.url} name={pokemonObject.name} nameToRender={pokemonObject.name} />
   );
 }
 
 const renderSeparator = () => {
   return (
-    <View style={styles.separator}/>
+    <View style={styles.separator} />
   );
 }
 

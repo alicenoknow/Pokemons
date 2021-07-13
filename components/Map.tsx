@@ -1,25 +1,19 @@
-import MapView, { Circle, Marker } from 'react-native-maps';
+import MapView, { Circle, LatLng, Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import React, { createRef, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import PikachuSprite from './PikachuMap';
 
-var coords = [{latitude: 50.048908, longitude: 19.965319},
-                {latitude: 49.993585, longitude: 19.8680989},
-                {latitude: 50.037809, longitude: 19.937386},
-                {latitude: 49.991532, longitude: 19.909643},
-                {latitude: 50.118004, longitude: 19.0}
-                ];
-var COORDS_NUM = 5;
 const screen = Dimensions.get('window');
-const ASPECT_RATIO = screen.width / screen.height;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const LATITUDE = 50.048908;
-const LONGITUDE = 19.965319;
+const LATITUDE_DELTA = 0.122;
+const LONGITUDE_DELTA = LATITUDE_DELTA * screen.width / screen.height;
 
+const initialCoords = {
+    latitude: 50.048908,
+    longitude: 19.965319
+}
 
-const Direction =  {
+const Direction = {
     Left: {
         rotation: 40,
         scale: 1
@@ -27,39 +21,33 @@ const Direction =  {
     Right: {
         rotation: 340,
         scale: -1
-    } 
-  }
+    }
+}
 
 export default function Map() {
 
     const marker = createRef<Marker>();
     const map = createRef<MapView>();
 
-    const [index, setIndex] = useState(1);
-    const [coordinates, setCoordinates] = useState(coords[0]);
-    const [tapCoordinates, setTapCoordinates] = useState(coords[0]);
+    const [currentCoordinates, setCurr] = useState(initialCoords);
     const [direction, setDirection] = useState(Direction.Right);
 
     const onPress = (event: any) => {
-        setTapCoordinates(event.coordinate)
-        coords.splice(index, 0, event.coordinate)
-        COORDS_NUM++;
+        animateGoTo(event.coordinate);
     }
 
-    const animateGoTo = () => {
-        setCoordinates(coords[index])
-        map.current?.animateToRegion({ latitude: coords[index].latitude,
-            longitude: coords[index].longitude,
+    const animateGoTo = (nextCoordinates: LatLng) => {
+        map.current?.animateToRegion({
+            latitude: nextCoordinates.latitude,
+            longitude: nextCoordinates.longitude,
             latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA, }, 1000);
-        setIndex((index + 1) % COORDS_NUM);
-        setDirection(findDirection())
+            longitudeDelta: LONGITUDE_DELTA,
+        }, 1000);
+        setDirection(findDirection(currentCoordinates, nextCoordinates))
+        setCurr(nextCoordinates);
     }
 
-    const findDirection = () => {
-        const newCoordinates = coords[index];
-        const prevCoordinates = coords[getPrev()];
-
+    const findDirection = (prevCoordinates: LatLng, newCoordinates: LatLng) => {
         if (prevCoordinates.longitude < newCoordinates.longitude) {
             return Direction.Right;
         }
@@ -68,39 +56,32 @@ export default function Map() {
         }
     }
 
-    const getPrev = () => {
-        if (index === 0) {
-            return COORDS_NUM - 1;
+    const goToRandom = () => {
+        const newCoords = {
+            latitude: currentCoordinates.latitude + (Math.random() - 0.5) / 5,
+            longitude: currentCoordinates.longitude + (Math.random() - 0.5) / 5
         }
-        return index - 1;
+        animateGoTo(newCoords);
     }
 
     return (
         <View style={styles.container}>
             <MapView style={styles.map}
                 onPress={e => onPress(e.nativeEvent)}
-                followsUserLocation={true}
                 ref={map}
                 initialRegion={{
-                    latitude: LATITUDE,
-                    longitude: LONGITUDE,
+                    ...initialCoords,
                     latitudeDelta: LATITUDE_DELTA,
                     longitudeDelta: LONGITUDE_DELTA,
                 }}>
                 <Marker
-                    coordinate={coordinates}
+                    coordinate={currentCoordinates}
                     ref={marker}>
-                    <PikachuSprite rotation={direction.rotation} scale={direction.scale}/>
+                    <PikachuSprite rotation={direction.rotation} scale={direction.scale} />
                 </Marker>
-     
-                <Circle 
-                center={tapCoordinates} 
-                radius={400} 
-                fillColor='rgba(4,2,150,0.3)'
-                strokeColor='rgba(1,1,1,0)'/>
             </MapView>
             <TouchableOpacity
-                onPress={animateGoTo}
+                onPress={goToRandom}
                 style={styles.button}>
                 <Text style={styles.text}>Next step</Text>
             </TouchableOpacity>
@@ -132,7 +113,5 @@ const styles = StyleSheet.create({
         width: 110,
         height: 110,
         resizeMode: 'contain',
-        
     }
-
 });

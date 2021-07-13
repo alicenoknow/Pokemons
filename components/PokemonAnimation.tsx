@@ -15,27 +15,25 @@ const PokemonAnimation = React.forwardRef((props: AnimationProps, ref: any) => {
 
   function onPress() {
     const anim = ref.current;
-          if (anim) {
-              anim.reset();
-              anim.play();
-          }
+    if (anim) {
+      anim.reset();
+      anim.play();
+    }
   }
 
   return (
-        <TouchableOpacity
-          onPress={onPress}>
-          <LottieView
-            ref={ref}
-            source={props.source}
-            loop={false}
-            style={{
-                width: props.size,
-                height: props.size,
-                transform: [{ rotate: props.rotation}],
-            }}
-            autoPlay={true}
-          />
-        </TouchableOpacity>
-
+    <TouchableOpacity
+      onPress={onPress}>
+      <LottieView
+        ref={ref}
+        source={props.source}
+        loop={false}
+        style={{
+          width: props.size,
+          height: props.size,
+          transform: [{ rotate: props.rotation }],
+        }}
+        autoPlay={true} />
+    </TouchableOpacity>
   );
-  })
+})

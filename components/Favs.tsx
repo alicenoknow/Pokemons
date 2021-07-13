@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { updateStorage, initialStorage } from "../utlis/storage";
 
-const FavContext = createContext<{pokemons: string[], addPokemon: (pokemon: string) => void, removePokemon: (pokemon: string) => void}>({pokemons: [], addPokemon: () => {}, removePokemon: () => {}});
+const FavContext = createContext<{ pokemons: string[], addPokemon: (pokemon: string) => void, removePokemon: (pokemon: string) => void }>({ pokemons: [], addPokemon: () => { }, removePokemon: () => { } });
 
 export const useFavContext = () => useContext(FavContext);
 
@@ -30,11 +30,11 @@ export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
   }
 
   useEffect(() => {
-      async function loadPokemons() {
-        const pokemons = await initialStorage();    
-        setPokemons(pokemons);
-      }
-      loadPokemons();
+    async function loadPokemons() {
+      const pokemons = await initialStorage();
+      setPokemons(pokemons);
+    }
+    loadPokemons();
   }, [])
 
   return (

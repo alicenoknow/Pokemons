@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import FavButton from '../components/FavButton';
 import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
-import {getPokemonImageUrl } from '../utlis/api'
+import {getPokemonDetails } from '../utlis/api'
 
 export default function TabOneScreen() {
 
@@ -17,7 +17,7 @@ export default function TabOneScreen() {
         <FavButton name={name.toLowerCase()}/>
     </View>
     <View style={styles.containerMain}>
-      <FindPokemon onFindPress={getPokemonImageUrl} onChangeUrl={setImageUrl} onNameChange={setName} setClick={setClicked}/>
+      <FindPokemon onFindPress={getPokemonDetails} onChangeUrl={setImageUrl} onNameChange={setName} setClick={setClicked}/>
       <PokemonImage url={url} name={name.toLowerCase()} clicked={clicked} setClick={setClicked}/>
     </View>
     </>

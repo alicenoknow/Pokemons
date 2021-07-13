@@ -41,3 +41,9 @@ export interface PokemonInfo {
   url: string;
   name: string;
 }
+
+export interface PokemonDetailsType {
+  url: string;
+  type: string;
+  baseExperience: number;
+}

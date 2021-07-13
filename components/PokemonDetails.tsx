@@ -3,20 +3,15 @@ import { useState, useEffect} from 'react';
 import { Text, View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { getPokemonDetails } from '../utlis/api';
 import FavButton from './FavButton';
+import { PokemonDetailsType } from '../types'
 
 interface PokemonDetailsProps {
     name: string;
 }
 
-interface PokemonDetails {
-    type: string;
-    imageUrl: string;
-    baseExperience: number;
-}
-
 export default function PokemonDetails(props: PokemonDetailsProps) {
 
-    const [details, setDetails] = useState<PokemonDetails | null>(null);
+    const [details, setDetails] = useState<PokemonDetailsType | null>(null);
 
     useEffect(() => {
         async function setPokemonDetails() {
@@ -40,7 +35,7 @@ export default function PokemonDetails(props: PokemonDetailsProps) {
         <FavButton name={props.name}/>
         <Image
           style={styles.pokemon}
-          source={{ uri: details.imageUrl}}/>
+          source={{ uri: details.url}}/>
         <Text style={styles.name}>{props.name}</Text>
         <View>
             <Text style={styles.info}>Type: {details.type}</Text>

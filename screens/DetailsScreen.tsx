@@ -9,17 +9,17 @@ interface DetailsScreenProps {
 
 // TODO types https://reactnavigation.org/docs/typescript
 export default function DetailsScreen(props: DetailsScreenProps) {
-    if (props.route.params.name)
-        return ( 
-            <View style={styles.containerMain}>
-                <PokemonDetails name={props.route.params.name}/>
-            </View>
-            );
-    else {
-        return (
-        <Text style={styles.text}>ajaj</Text>
-        );
-    }
+  if (props.route.params.name)
+    return (
+      <View style={styles.containerMain}>
+        <PokemonDetails name={props.route.params.name} />
+      </View>
+    );
+  else {
+    return (
+      <Text style={styles.text}>ajaj</Text>
+    );
+  }
 }
 
 const styles = StyleSheet.create({

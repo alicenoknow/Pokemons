@@ -17,26 +17,27 @@ export default function PokemonImage(props: PokemonImageProps) {
   const navigation = useNavigation();
 
   const onPress = useCallback(() => {
-    navigation.navigate('DetailsScreen', {name: props.name});
+    navigation.navigate('DetailsScreen', { name: props.name });
   }, [props.name])
 
-  if (props.url !== "") {
+
+  if (props.url !== '') {
     return (
-      <View style={styles.container}>
+      <View style={styles.mainContainer}>
         <TouchableOpacity
           onPress={onPress}>
           <Text style={styles.name}>{props.nameToRender}</Text>
           <Image
             style={styles.pokemon}
             source={{ uri: props.url }} />
-       </TouchableOpacity>
+        </TouchableOpacity>
       </View>);
   }
   else {
     return (
-      <View style={styles.container}>
+      <View style={styles.mainContainer}>
         <View style={styles.animationContainer}>
-          <NotFoundAnimation clicked={props.clicked} setClicked={props.setClick}/>
+          <NotFoundAnimation clicked={props.clicked} setClicked={props.setClick} />
         </View>
         <Text style={styles.name} >Pokemon {props.name} does not exist :c</Text>
       </View>
@@ -45,7 +46,7 @@ export default function PokemonImage(props: PokemonImageProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#420', 
+    color: '#420',
     margin: 15,
   },
   separator: {

@@ -1,7 +1,6 @@
 import { StyleSheet, Image } from 'react-native';
 import React from 'react';
 
-
 const pikachuImage = require('../assets/images/pik.png');
 
 interface PikachuProps {
@@ -15,9 +14,8 @@ export default function PikachuSprite(props: PikachuProps) {
             width: 110,
             height: 110,
             resizeMode: 'contain',
-            transform: [{ rotate: props.rotation+'deg'},{scaleX: props.scale}],
+            transform: [{ rotate: props.rotation + 'deg' }, { scaleX: props.scale }],
         }
-    
     });
 
     return (
