@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
 import { getPokmeonInfoFromName, isPokemonInfo } from '../utlis/api'
 import { PokemonInfo } from '../types';
 import { useEffect } from 'react';
 import { useFavContext } from './Favs';
 import { useState } from 'react';
+import Map from './Map';
 
 export default function FavsList() {
 
@@ -29,6 +30,7 @@ export default function FavsList() {
         renderItem={({ item }) => renderPokemon(item)}
         keyExtractor={item => item.name}
         ItemSeparatorComponent={renderSeparator}
+        ListEmptyComponent={Map}
       />
     </View>
   );
@@ -46,10 +48,20 @@ const renderSeparator = () => {
   );
 }
 
+const emptyFavs = () => {
+  return (
+    <Text style={styles.text}>You have no fav pokemons :c</Text>
+  );
+}
+
 const styles = StyleSheet.create({
   separator: {
     height: 1,
     width: 250,
     backgroundColor: "#3337"
+  },
+  text: {
+    margin: 50,
+    fontSize: 40
   }
 });
