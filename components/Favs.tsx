@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
+import { getPokmeonInfoFromName } from "../utlis/api";
 import { updateStorage, initialStorage } from "../utlis/storage";
 
 const FavContext = createContext<{ pokemons: string[], addPokemon: (pokemon: string) => void, removePokemon: (pokemon: string) => void }>({ pokemons: [], addPokemon: () => { }, removePokemon: () => { } });
@@ -9,15 +10,18 @@ export const useFavContext = () => useContext(FavContext);
 export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
   const [pokemons, setPokemons] = useState<string[]>([]);
 
-  const addPokemon = (pokemon: string) => {
+  const addPokemon = async (pokemon: string) => {
     if (pokemons.includes(pokemon)) {
       Alert.alert(pokemon + ' already in your favs');
       return;
     }
-    const newPokemons = [...pokemons, pokemon];
-    setPokemons(newPokemons);
-    updateStorage(newPokemons);
-    Alert.alert(pokemon + ' added to your favs');
+    const checkInfo = await getPokmeonInfoFromName(pokemon);
+    if (checkInfo) {
+      const newPokemons = [...pokemons, pokemon];
+      setPokemons(newPokemons);
+      updateStorage(newPokemons);
+      Alert.alert(pokemon + ' added to your favs');
+    }
   }
 
   const removePokemon = (pokemon: string) => {

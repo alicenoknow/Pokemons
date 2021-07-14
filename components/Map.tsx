@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import PikachuSprite from './PikachuMap';
 
 const screen = Dimensions.get('window');
-const LATITUDE_DELTA = 0.122;
+const LATITUDE_DELTA = 0.2;
 const LONGITUDE_DELTA = LATITUDE_DELTA * screen.width / screen.height;
 
 const initialCoords = {
@@ -37,12 +37,9 @@ export default function Map() {
     }
 
     const animateGoTo = (nextCoordinates: LatLng) => {
-        map.current?.animateToRegion({
-            latitude: nextCoordinates.latitude,
-            longitude: nextCoordinates.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-        }, 1000);
+        map.current?.animateCamera({
+            center: {latitude: nextCoordinates.latitude, longitude: nextCoordinates.longitude}
+        }, {duration: 1000});
         setDirection(findDirection(currentCoordinates, nextCoordinates))
         setCurr(nextCoordinates);
     }
@@ -76,42 +73,45 @@ export default function Map() {
                 }}>
                 <Marker
                     coordinate={currentCoordinates}
-                    ref={marker}>
+                    ref={marker}
+                    style={styles.marker}>
                     <PikachuSprite rotation={direction.rotation} scale={direction.scale} />
                 </Marker>
             </MapView>
             <TouchableOpacity
                 onPress={goToRandom}
                 style={styles.button}>
-                <Text style={styles.text}>Next step</Text>
+                <Text style={styles.text}>Hops</Text>
             </TouchableOpacity>
         </View>
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
     map: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height - 300,
+        flex: 5,
+        height: '100%',
+        width: '100%',
     },
     button: {
-        height: 300,
+        flex: 1,
+        width: '100%',
         alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#acf'
     },
     text: {
         fontSize: 40,
         padding: 40
     },
-    img: {
-        width: 110,
-        height: 110,
-        resizeMode: 'contain',
+    marker: {
+        padding: 20, 
+        alignItems: 'center', 
+        justifyContent: 'center'
     }
 });

@@ -1,20 +1,10 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
 import FavsList from '../components/FavsList';
 
 export default function TabThreeScreen() {
 
   return (
-    <View style={styles.container}>
-      <FavsList />
-    </View>
+    <FavsList />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-});

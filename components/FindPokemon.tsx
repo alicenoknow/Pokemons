@@ -17,6 +17,7 @@ export default function FindPokemon(props: FindButtonProps) {
   const onFindPress = () => {
     async function setUrl() {
       const pokemonDetails = await props.onFindPress(text);
+      console.log(pokemonDetails)
       if (pokemonDetails){
         props.onChangeUrl(pokemonDetails.url);
       }
