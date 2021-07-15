@@ -24,7 +24,6 @@ export default function FavsList() {
   }, [pokemons])
 
   return (
-    <View style={styles.container}>
       <FlatList 
         contentContainerStyle={{flex: 1}}
         data={pokemonObjects}
@@ -33,7 +32,6 @@ export default function FavsList() {
         ItemSeparatorComponent={renderSeparator}
         ListEmptyComponent={Map}
       />
-    </View>
   );
 }
 

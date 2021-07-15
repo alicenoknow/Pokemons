@@ -1,6 +1,6 @@
-import MapView, { Circle, LatLng, Marker } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import React, { createRef, useState } from 'react';
+import MapView, { KmlMapEvent, LatLng, MapEvent, Marker } from 'react-native-maps';
+import { StyleSheet, Text, View, Dimensions, LayoutAnimationTypes } from 'react-native';
+import React, { BaseSyntheticEvent, createRef, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import PikachuSprite from './PikachuMap';
 
@@ -32,8 +32,8 @@ export default function Map() {
     const [currentCoordinates, setCurr] = useState(initialCoords);
     const [direction, setDirection] = useState(Direction.Right);
 
-    const onPress = (event: any) => {
-        animateGoTo(event.coordinate);
+    const onPress = ({ nativeEvent }: MapEvent) => {
+        animateGoTo(nativeEvent.coordinate);
     }
 
     const animateGoTo = (nextCoordinates: LatLng) => {
@@ -64,7 +64,7 @@ export default function Map() {
     return (
         <View style={styles.container}>
             <MapView style={styles.map}
-                onPress={e => onPress(e.nativeEvent)}
+                onPress={onPress}
                 ref={map}
                 initialRegion={{
                     ...initialCoords,
@@ -89,9 +89,7 @@ export default function Map() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1
     },
     map: {
         flex: 5,

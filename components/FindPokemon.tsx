@@ -14,20 +14,21 @@ interface FindButtonProps {
 export default function FindPokemon(props: FindButtonProps) {
 
   const [text, setText] = React.useState('');
-  const onFindPress = () => {
+  const { setClick, onNameChange, onFindPress } = props;
+  const onPress = () => {
     async function setUrl() {
-      const pokemonDetails = await props.onFindPress(text);
-      console.log(pokemonDetails)
-      if (pokemonDetails){
+      const pokemonDetails = await onFindPress(text);
+      if (pokemonDetails) {
         props.onChangeUrl(pokemonDetails.url);
       }
       else {
         props.onChangeUrl('');
       }
     }
+
     setUrl();
-    props.setClick(true);
-    props.onNameChange(text);
+    setClick(true);
+    onNameChange(text);
   }
 
   return (
@@ -40,11 +41,10 @@ export default function FindPokemon(props: FindButtonProps) {
       </TextInput>
       <TouchableOpacity
         style={styles.button}
-        onPress={onFindPress}>
+        onPress={onPress}>
         <Text>Find</Text>
       </TouchableOpacity>
     </View>
-
   );
 }
 

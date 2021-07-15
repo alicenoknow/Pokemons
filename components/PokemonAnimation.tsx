@@ -5,19 +5,20 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export { PokemonAnimation }
 
 interface AnimationProps {
-  source: any,
-  ref: any,
+  source: string,
   rotation: string,
   size: number
 }
 
-const PokemonAnimation = React.forwardRef((props: AnimationProps, ref: any) => {
+const PokemonAnimation = React.forwardRef<LottieView, AnimationProps>((props, ref) => {
 
   function onPress() {
-    const anim = ref.current;
-    if (anim) {
-      anim.reset();
-      anim.play();
+    if(ref && 'current' in ref) {
+      const anim = ref.current;
+      if (anim) {
+        anim.reset();
+        anim.play();
+      }
     }
   }
 

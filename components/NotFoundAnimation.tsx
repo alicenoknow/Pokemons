@@ -1,8 +1,8 @@
-import React, { createRef, useState } from 'react';
+import React, { createRef, RefObject, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import { PokemonAnimation } from './PokemonAnimation';
-import { diff } from 'react-native-reanimated';
+import LottieView from 'lottie-react-native';
 
 interface AnimationProps {
   clicked: boolean | undefined;
@@ -13,19 +13,16 @@ const pikachuImage = require('../assets/animations/pikachu.json');
 const diglettImage = require('../assets/animations/diglett.json');
 const squirtleImage = require('../assets/animations/squirtle.json');
 
-export const NotFoundAnimation = React.forwardRef((props: AnimationProps, ref) => {
+const REFS_NUM = 9;
 
-  const refsNum = 9;
-  const [elRefs, setElRefs] = useState([]);
-
-  React.useEffect(() => {
-    setElRefs(elRefs => (
-      Array(refsNum).fill(null).map((_, i) => elRefs[i] || createRef())
-    ));
-  }, [refsNum]);
+export const NotFoundAnimation = (props: AnimationProps) => {
+  const elRefs: RefObject<LottieView>[] = (Array(REFS_NUM).fill(null).map((_, i) => createRef()));
 
   useEffect(() => {
-    elRefs.forEach((ref: any) => {
+    if (!props.clicked) {
+      return;
+    }
+    elRefs.forEach((ref: RefObject<LottieView>) => {
       const anim = ref.current;
       if (anim) {
         anim.reset();
@@ -36,16 +33,6 @@ export const NotFoundAnimation = React.forwardRef((props: AnimationProps, ref) =
       props.setClicked(false);
     }
   }, [props.clicked]);
-
-  const styles = StyleSheet.create({
-    row1: {
-      flexDirection: 'row',
-      marginBottom: -30
-    },
-    row2: {
-      flexDirection: 'row'
-    },
-  });
 
   return (
     <>
@@ -66,5 +53,14 @@ export const NotFoundAnimation = React.forwardRef((props: AnimationProps, ref) =
       </View>
     </>
   );
-})
+  }
 
+const styles = StyleSheet.create({
+  row1: {
+    flexDirection: 'row',
+    marginBottom: -30
+  },
+  row2: {
+    flexDirection: 'row'
+  },
+});

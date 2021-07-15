@@ -11,43 +11,28 @@ export default function FindPokemon(props: FavButtonProps) {
   const { pokemons, addPokemon, removePokemon } = useFavContext();
 
   const onFindPressAdd = () => {
-    if (props.name) {
       const key = props.name.toLowerCase();
       addPokemon(key);
-    }
   }
 
   const onFindPressRemove = () => {
-    if (props.name) {
       const key = props.name.toLowerCase();
       removePokemon(key);
-    }
   }
 
-  function inFavs(name: string) {
+  const inFavs = (name: string) => {
     return pokemons.includes(name.toLowerCase());
   }
 
-  if (inFavs(props.name)) {
+  const AddOrRemove = inFavs(props.name);
     return (
       <TouchableOpacity
         style={styles.button}
-        onPress={onFindPressRemove}>
-        <Text style={styles.button}>💔</Text>
+        onPress={AddOrRemove ? onFindPressRemove : onFindPressAdd}>
+        <Text style={styles.button}>{AddOrRemove ? '💔 ': '❤️'}</Text>
       </TouchableOpacity>
     );
-  }
-  else {
-    return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={onFindPressAdd}>
-        <Text style={styles.button}>❤️</Text>
-      </TouchableOpacity>
-    );
-  }
 }
-
 
 const styles = StyleSheet.create({
   button: {

@@ -13,17 +13,14 @@ export default function PokemonList() {
   React.useEffect(() => { loadPokemonBatch(addPokemons, url, setUrl) }, []);
 
   return (
-    <View>
       <FlatList
         data={pokemons}
         renderItem={({ item }) => renderPokemon(item)}
-        onEndReachedThreshold={3}
+        onEndReachedThreshold={1}
         onEndReached={() => loadPokemonBatch(addPokemons, url, setUrl)}
         keyExtractor={item => item.name}
         ItemSeparatorComponent={renderSeparator}
-      />
-
-    </View>);
+      />);
 }
 
 
