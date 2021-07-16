@@ -4,7 +4,7 @@ import FavButton from './FavButton';
 import { gql, useQuery } from '@apollo/client';
 
 interface PokemonDetailsProps {
-    name: string;
+  name: string;
 }
 
 interface PokemonDetailsGQL {
@@ -45,26 +45,25 @@ const pokemonQuery = gql`
 export default function PokemonDetails(props: PokemonDetailsProps) {
 
   const { name } = props
-  const { loading, error, data } = useQuery(pokemonQuery, {variables: {name}});
+  const { loading, error, data } = useQuery(pokemonQuery, { variables: { name }, fetchPolicy: "cache-first"});
 
-    // REST API
-    // const [details, setDetails] = useState<PokemonDetailsType | null>(null);
-    // useEffect(() => {
-    //     async function setPokemonDetails() {
-    //     //   await new Promise(resolve => setTimeout(resolve, 3000)); // czekanie N sekund
-    //       const pokemonDetails = await getPokemonDetails(props.name);
-    //       if (pokemonDetails !== undefined){
-    //         setDetails(pokemonDetails);
-    //       }
-    //     }
-    //     if (props.name){
-    //         setPokemonDetails();
-    //     }
-    // }, [])
-
-
+  // REST API
+  // const [details, setDetails] = useState<PokemonDetailsType | null>(null);
+  // useEffect(() => {
+  //     async function setPokemonDetails() {
+  //     //   await new Promise(resolve => setTimeout(resolve, 3000)); // czekanie N sekund
+  //       const pokemonDetails = await getPokemonDetails(props.name);
+  //       if (pokemonDetails !== undefined){
+  //         setDetails(pokemonDetails);
+  //       }
+  //     }
+  //     if (props.name){
+  //         setPokemonDetails();
+  //     }
+  // }, [])
+  
   if (loading) {
-    return <View><ActivityIndicator/></View>
+    return <View><ActivityIndicator /></View>
   }
 
   if (error) {
@@ -74,19 +73,19 @@ export default function PokemonDetails(props: PokemonDetailsProps) {
   }
   return (
     <View style={styles.container}>
-        <FavButton name={name}/>
-        <Image
-          style={styles.pokemon}
-          source={{ uri: data.pokemon.image}}/>
-        <Text style={styles.name}>{data.pokemon.name}</Text>
-        <View>
-            <Text style={styles.info}>Types: {data.pokemon.types.join(", ")}</Text>
-            <Text style={styles.info}>Classification: {data.pokemon.classification}</Text>
-            <Text style={styles.info}>Weaknesses: {data.pokemon.weaknesses.join(", ")}</Text>
-            <Text style={styles.info}>Weight: from {data.pokemon.weight.minimum} to {data.pokemon.weight.maximum}</Text>
-            <Text style={styles.info}>Height: from {data.pokemon.height.minimum} to {data.pokemon.height.maximum}</Text>
+      <FavButton name={name} />
+      <Image
+        style={styles.pokemon}
+        source={{ uri: data.pokemon.image }} />
+      <Text style={styles.name}>{data.pokemon.name}</Text>
+      <View>
+        <Text style={styles.info}>Types: {data.pokemon.types.join(", ")}</Text>
+        <Text style={styles.info}>Classification: {data.pokemon.classification}</Text>
+        <Text style={styles.info}>Weaknesses: {data.pokemon.weaknesses.join(", ")}</Text>
+        <Text style={styles.info}>Weight: from {data.pokemon.weight.minimum} to {data.pokemon.weight.maximum}</Text>
+        <Text style={styles.info}>Height: from {data.pokemon.height.minimum} to {data.pokemon.height.maximum}</Text>
 
-         </View>
+      </View>
     </View>);
 }
 const styles = StyleSheet.create({
@@ -94,16 +93,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pokemon: {
-    width: 180,
-    height: 180,
+    width: 200,
+    height: 200,
     resizeMode: 'center',
     margin: 10,
-    padding: 10,
     backgroundColor: "#fff",
-    borderRadius: 10,
-    borderWidth: 5,
+    borderRadius: 15,
+    borderWidth: 15,
     borderColor: '#acf'
-
   },
   name: {
     fontSize: 20,

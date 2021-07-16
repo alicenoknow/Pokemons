@@ -6,8 +6,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import {FavsContextProvider} from './components/Favs'
+import {FavsContextProvider} from './components/FavsContext'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { Provider } from 'react-redux';
+import store from './utlis/store';
+
 
 const client = new ApolloClient({
   uri: 'https://graphql-pokemon2.vercel.app',
@@ -22,14 +25,16 @@ export default function App() {
     return null;
   } else {
     return (
-      <ApolloProvider client={client}>
-        <FavsContextProvider>
-          <SafeAreaProvider>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar />
-          </SafeAreaProvider>
-        </FavsContextProvider>
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <FavsContextProvider>
+            <SafeAreaProvider>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar />
+            </SafeAreaProvider>
+          </FavsContextProvider>
+        </ApolloProvider>
+      </Provider>
     );
   }
 }

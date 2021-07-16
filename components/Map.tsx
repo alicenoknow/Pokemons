@@ -24,6 +24,12 @@ const Direction = {
     }
 }
 
+export const getSteps = (prevCoordinates: LatLng, newCoordinates: LatLng, steps: number) => {
+    const dLat= (newCoordinates.latitude - prevCoordinates.latitude) / steps;
+    const dLon = (newCoordinates.longitude - prevCoordinates.longitude) / steps;
+    return Array(steps).fill(null).map((_, i) => {return {latitude: prevCoordinates.latitude + (i+1) * dLat, longitude: prevCoordinates.longitude + (i+1) * dLon}});
+}
+
 export default function Map() {
 
     const marker = createRef<Marker>();

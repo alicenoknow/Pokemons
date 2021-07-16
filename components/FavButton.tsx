@@ -1,6 +1,10 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useFavContext } from './Favs';
+import { State } from 'react-native-gesture-handler';
+import store, { useAppDispatch, useAppSelector } from '../utlis/store';
+import { useFavContext } from './FavsContext';
+import { favSlice } from './FavsRedux';
 
 interface FavButtonProps {
   name: string;
@@ -8,19 +12,24 @@ interface FavButtonProps {
 
 export default function FindPokemon(props: FavButtonProps) {
 
-  const { pokemons, addPokemon, removePokemon } = useFavContext();
+  // const { pokemons, addPokemon, removePokemon } = useFavContext();
+  const pokemons = useAppSelector(state => state.pokemons.value);
+  const dispatch = useAppDispatch()
 
   const onFindPressAdd = () => {
       const key = props.name.toLowerCase();
-      addPokemon(key);
+      // addPokemon(key);
+      dispatch(favSlice.actions.addPokemon(key))
   }
 
   const onFindPressRemove = () => {
       const key = props.name.toLowerCase();
-      removePokemon(key);
+      // removePokemon(key);
+      dispatch(favSlice.actions.removePokemon(key))
   }
 
   const inFavs = (name: string) => {
+    // return pokemons.includes(name.toLowerCase());
     return pokemons.includes(name.toLowerCase());
   }
 

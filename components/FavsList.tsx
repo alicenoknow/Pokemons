@@ -1,17 +1,19 @@
 import * as React from 'react';
-import { Text, View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
 import { getPokmeonInfoFromName, isPokemonInfo } from '../utlis/api'
 import { PokemonInfo } from '../types';
 import { useEffect } from 'react';
-import { useFavContext } from './Favs';
 import { useState } from 'react';
 import Map from './Map';
+import { useAppSelector } from '../utlis/store';
 
 export default function FavsList() {
 
   const [pokemonObjects, setPokemonObjects] = useState<PokemonInfo[]>([]);
-  const { pokemons } = useFavContext();
+  // const { pokemons } = useFavContext();
+
+  const pokemons = useAppSelector(state => state.pokemons.value);
 
   useEffect(() => {
     async function loadPokemonObjects() {
