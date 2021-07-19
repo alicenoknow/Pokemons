@@ -1,12 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import * as React from 'react';
+import { ReactElement } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { RootStackParamList } from '../types';
 
 export default function NotFoundScreen({
   navigation,
-}: StackScreenProps<RootStackParamList, 'NotFound'>) {
+}: StackScreenProps<RootStackParamList, 'NotFound'>): ReactElement {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>This screen does not exist.</Text>

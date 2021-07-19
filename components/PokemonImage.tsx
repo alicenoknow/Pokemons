@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
-import { useCallback } from 'react';
+import { ReactElement, useCallback } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { NotFoundAnimation } from './NotFoundAnimation';
 
@@ -12,7 +12,7 @@ interface PokemonImageProps {
   setClick?: (click: boolean) => void;
 }
 
-export default function PokemonImage(props: PokemonImageProps) {
+export default function PokemonImage(props: PokemonImageProps): ReactElement {
 
   const navigation = useNavigation();
 

@@ -1,5 +1,6 @@
 import { StyleSheet, Animated, Easing } from 'react-native';
 import React from 'react';
+import { ReactElement } from 'react';
 
 const pikachuImage = require('../assets/images/pik.png');
 
@@ -8,7 +9,7 @@ interface PikachuProps {
     scale: number;
 }
 
-export default function PikachuSprite(props: PikachuProps) {
+export default function PikachuSprite(props: PikachuProps): ReactElement {
 
     const spinValue = new Animated.Value(0);
 

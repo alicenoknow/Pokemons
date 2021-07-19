@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { ReactElement } from 'react';
 import { View, StyleSheet } from 'react-native';
 import FavButton from '../components/FavButton';
 import FindPokemon from '../components/FindPokemon';
 import PokemonImage from '../components/PokemonImage';
 import {getPokemonDetails } from '../utlis/api'
 
-export default function TabOneScreen() {
+export default function TabOneScreen(): ReactElement {
 
   const[url, setImageUrl] = React.useState('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png')
   const[name, setName] = React.useState('')

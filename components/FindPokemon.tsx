@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ReactElement } from 'react';
 import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { PokemonDetailsType } from '../types';
 
@@ -11,7 +12,7 @@ interface FindButtonProps {
   setClick: (clicked: boolean) => void;
 }
 
-export default function FindPokemon(props: FindButtonProps) {
+export default function FindPokemon(props: FindButtonProps): ReactElement {
 
   const [text, setText] = React.useState('');
   const { setClick, onNameChange, onFindPress } = props;

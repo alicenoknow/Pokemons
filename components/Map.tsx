@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import React, { createRef, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import PikachuSprite from './PikachuSprite';
+import { ReactElement } from 'react';
 
 const screen = Dimensions.get('window');
 const LATITUDE_DELTA = 0.2;
@@ -30,7 +31,7 @@ export const getSteps = (prevCoordinates: LatLng, newCoordinates: LatLng, steps:
     return Array(steps).fill(null).map((_, i) => {return {latitude: prevCoordinates.latitude + (i+1) * dLat, longitude: prevCoordinates.longitude + (i+1) * dLon}});
 }
 
-export default function Map() {
+export default function Map(): ReactElement {
 
     const marker = createRef<Marker>();
     const map = createRef<MapView>();

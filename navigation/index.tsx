@@ -6,13 +6,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { ReactElement } from 'react';
 
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 
-export default function Navigation() {
+export default function Navigation(): ReactElement {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import FavButton from './FavButton';
 import { gql, useQuery } from '@apollo/client';
+import { ReactElement } from 'react';
 
 interface PokemonDetailsProps {
   name: string;
@@ -26,9 +27,9 @@ const pokemonQuery = gql`
                 }
               }`
 
-export default function PokemonDetails(props: PokemonDetailsProps) {
+export default function PokemonDetails(props: PokemonDetailsProps): ReactElement {
 
-  const { name } = props
+  const { name } = props;
   const { loading, error, data } = useQuery(pokemonQuery, { variables: { name }, fetchPolicy: "cache-first"});
 
   // REST API

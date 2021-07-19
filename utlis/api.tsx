@@ -9,7 +9,7 @@ function isPokemonInfo(pokemon: PokemonInfo | undefined): pokemon is PokemonInfo
   return pokemon !== undefined;
 }
 
-async function loadPokemonBatch(updatePokemonsList: addPokemonsType, url: string, setUrl: updateUrlType) {
+async function loadPokemonBatch(updatePokemonsList: addPokemonsType, url: string, setUrl: updateUrlType): Promise<void> {
   try {
     const responseList = await fetch(url);
     const responseJsonList = await responseList.json();
@@ -41,7 +41,7 @@ async function getPokemonInfo(pokemon: PokemonJSONType): Promise<PokemonInfo | u
   }
 }
 
-function getPokmeonInfoFromName(name: string) {
+function getPokmeonInfoFromName(name: string): Promise<PokemonInfo | undefined> {
   const pokemonJSON = getPokemonUrl(name);
   const pokemonInfo = getPokemonInfo(pokemonJSON)
   return pokemonInfo;

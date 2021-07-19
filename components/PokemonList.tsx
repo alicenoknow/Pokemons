@@ -3,8 +3,9 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
 import { loadPokemonBatch } from '../utlis/api'
 import { PokemonInfo } from '../types';
+import { ReactElement } from 'react';
 
-export default function PokemonList() {
+export default function PokemonList(): ReactElement {
 
   const [url, setUrl] = React.useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=10");
   const [pokemons, setPokemons] = React.useState<ReadonlyArray<PokemonInfo>>([]);

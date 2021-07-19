@@ -2,13 +2,14 @@ import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PokemonDetails from '../components/PokemonDetails';
 import { RouteProp } from '@react-navigation/native';
+import { ReactElement } from 'react';
 
 interface DetailsScreenProps {
   route: RouteProp<{ params: { name: string } }, 'params'>;
 }
 
 // TODO types https://reactnavigation.org/docs/typescript
-export default function DetailsScreen(props: DetailsScreenProps) {
+export default function DetailsScreen(props: DetailsScreenProps): ReactElement {
   if (props.route.params.name)
     return (
       <View style={styles.containerMain}>

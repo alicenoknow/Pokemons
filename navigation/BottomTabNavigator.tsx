@@ -16,10 +16,11 @@ import TabThreeScreen from '../screens/TabThreeScreen';
 
 import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList, } from '../types';
 import DetailsScreen from '../screens/DetailsScreen';
+import { ReactElement } from 'react';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-export default function BottomTabNavigator() {
+export default function BottomTabNavigator(): ReactElement {
   const colorScheme = useColorScheme();
 
   return (
@@ -30,24 +31,30 @@ export default function BottomTabNavigator() {
         name="Find"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: setIcon,
         }}
       />
       <BottomTab.Screen
         name="Browse"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: setIcon,
         }}
       />
       <BottomTab.Screen
         name="Favs"
         component={TabThreeNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: setIcon,
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+function setIcon(props: {color: string}) {
+  return (
+    <TabBarIcon name="ios-code" color={props.color} />
   );
 }
 

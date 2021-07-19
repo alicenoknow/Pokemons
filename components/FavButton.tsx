@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {ReactElement} from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../utlis/store';
 import { favSlice } from './FavsRedux';
@@ -7,7 +7,7 @@ interface FavButtonProps {
   name: string;
 }
 
-export default function FindPokemon(props: FavButtonProps) {
+export default function FindPokemon(props: FavButtonProps): ReactElement {
 
   // Context
   // const { pokemons, addPokemon, removePokemon } = useFavContext();

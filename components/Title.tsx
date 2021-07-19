@@ -1,11 +1,12 @@
 import * as React from 'react';
+import { ReactElement } from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 interface TitleProps {
   text: string;
 }
 
-const Title = (props: TitleProps) => {
+const Title = (props: TitleProps): ReactElement => {
   return (
     <Text style={styles.title}>{props.text}</Text>
   );

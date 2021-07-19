@@ -1,13 +1,19 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, ReactElement, ReactNode, useContext, useEffect, useState } from "react";
 import { Alert } from "react-native";
 import { getPokmeonInfoFromName } from "../utlis/api";
 import { updateStorage, initialStorage } from "../utlis/storage";
 
-const FavContext = createContext<{ pokemons: string[], addPokemon: (pokemon: string) => void, removePokemon: (pokemon: string) => void }>({ pokemons: [], addPokemon: () => { }, removePokemon: () => { } });
+interface FavContextType {
+  pokemons: string[];
+  addPokemon: (pokemon: string) => void;
+  removePokemon: (pokemon: string) => void;
+}
 
-export const useFavContext = () => useContext(FavContext);
+const FavContext = createContext<FavContextType>({ pokemons: [], addPokemon: () => ({ }), removePokemon: () => ({ }) });
+export const useFavContext = (): FavContextType => useContext(FavContext);
 
-export const FavsContextProvider = ({ children }) => {
+export const FavsContextProvider = (props: {children: ReactNode}): ReactElement => {
+  const { children } = props;
   const [pokemons, setPokemons] = useState<string[]>([]);
 
   const addPokemon = async (pokemon: string) => {
@@ -47,3 +53,4 @@ export const FavsContextProvider = ({ children }) => {
     </FavContext.Provider>
   );
 };
+

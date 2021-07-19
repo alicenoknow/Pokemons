@@ -3,14 +3,14 @@ import { View, FlatList, StyleSheet } from 'react-native';
 import PokemonImage from './PokemonImage';
 import { getPokmeonInfoFromName, isPokemonInfo } from '../utlis/api'
 import { PokemonInfo } from '../types';
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { useState } from 'react';
 import Map from './Map';
 import { useAppDispatch, useAppSelector } from '../utlis/store';
 import { initialStorage } from '../utlis/storage';
 import { favSlice } from './FavsRedux';
 
-export default function FavsList() {
+export default function FavsList(): ReactElement {
 
   const [pokemonObjects, setPokemonObjects] = useState<PokemonInfo[]>([]);
 

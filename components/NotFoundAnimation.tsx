@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import { PokemonAnimation } from './PokemonAnimation';
 import LottieView from 'lottie-react-native';
+import { ReactElement } from 'react';
 
 const pikachuImage = require('../assets/animations/pikachu.json');
 const diglettImage = require('../assets/animations/diglett.json');
@@ -15,7 +16,7 @@ interface AnimationProps {
 
 const REFS_NUM = 9;
 
-export const NotFoundAnimation = (props: AnimationProps) => {
+export const NotFoundAnimation = (props: AnimationProps): ReactElement => {
   const elRefs: RefObject<LottieView>[] = (Array(REFS_NUM).fill(null).map(() => createRef()));
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import useCachedResources from './hooks/useCachedResources';
@@ -16,11 +16,12 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-export default function App() {
+export default function App(): ReactElement | null {
   const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {
     return null;
+    
   } else {
     return (
       <Provider store={store}>
