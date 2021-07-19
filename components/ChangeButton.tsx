@@ -21,9 +21,9 @@ export default function ChangePokemon(props: {index: number}): ReactElement {
 
 const styles = StyleSheet.create({
     button: {
-        height: 50,
-        width: 200,
-        padding: 10,
+        height: 34,
+        width: 160,
+        padding: 4,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#acf',
@@ -31,6 +31,6 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     text: {
-         fontSize: 20,
+         fontSize: 14,
     }
   });

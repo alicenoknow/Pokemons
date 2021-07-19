@@ -3,24 +3,20 @@ import React from 'react';
 import { ReactElement } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useAppDispatch } from '../utlis/store';
+import { TypeColor } from '../utlis/typesColor';
 import { fightSlice } from './FightRedux';
 
-export default function ChangeLife(props: {symbol: string, index: number, color: string}): ReactElement {
+export default function Attack(props: {attack:string, damage:number, types:string[], index: number}): ReactElement {
     const dispatch = useAppDispatch();
 
     const sendDispatch = () => {
-        if(props.symbol == "+") {
-            dispatch(fightSlice.actions.increaseHealth({index: props.index}));
-        }
-        else {
-            dispatch(fightSlice.actions.decreaseHealth({index: props.index}));
-        }
+        dispatch(fightSlice.actions.decreaseHealth({index: (props.index + 1) % 2, value: props.damage}));
     }
 
     return (
-            <TouchableOpacity style={{ ...styles.button, backgroundColor: props.color}}
+            <TouchableOpacity style={{ ...styles.button, backgroundColor: TypeColor[props.types[0]]}}
                 onPress={sendDispatch}>
-                <Text style={styles.text}>{props.symbol}</Text>
+                <Text style={styles.text}>{props.attack}</Text>
             </TouchableOpacity>
     );
 }
@@ -28,13 +24,13 @@ export default function ChangeLife(props: {symbol: string, index: number, color:
 const styles = StyleSheet.create({
     button: {
         height: 50,
-        width: 50,
+        width: 90,
         alignItems: 'center',
         justifyContent: 'center',
         margin: 3,
-        borderRadius: 30
+        borderRadius: 13
     },
     text: {
-         fontSize: 30,
+         fontSize: 15,
     }
   });

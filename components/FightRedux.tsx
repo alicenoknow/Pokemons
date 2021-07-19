@@ -1,17 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { FightingPokemon } from '../types';
 
 interface FightState {
     pokemons: FightingPokemon[]
 }
 
-interface FightingPokemon {
-    name: string,
-    health: number,
-    maxHealth: number;
+const emptyPoke: FightingPokemon = {
+  name: "",
+  prevHealth: 0, 
+  health: 0, 
+  maxHealth: 1,
+  types: [],
+  attacks: {
+    special: [{damage: 0,name: ""}, {damage: 0,name: ""}],
+    fast: [{damage: 0, name: ""},{damage: 0, name: ""}]
+  }
 }
 
 const initialState: FightState = {
-    pokemons: [{name: "", health: 0, maxHealth: 1}, {name: "", health: 0, maxHealth: 1}]
+    pokemons: [emptyPoke, emptyPoke]
   }
 
 export const fightSlice = createSlice({
@@ -19,7 +26,6 @@ export const fightSlice = createSlice({
   initialState,
   reducers: {
     setPokemon: (state, action: PayloadAction<{pokemon: FightingPokemon, index: number}>) => {
-      console.log("sssssss ", action.payload.pokemon.maxHealth)
         state.pokemons[action.payload.index] = action.payload.pokemon;
     },
     
@@ -31,9 +37,9 @@ export const fightSlice = createSlice({
         state.pokemons[action.payload.index].health=state.pokemons[action.payload.index].maxHealth;
       }
     },
-    decreaseHealth: (state, action: PayloadAction<{index: number}>) => {
-      if (state.pokemons[action.payload.index].health-10 >= 0) {
-          state.pokemons[action.payload.index].health-=10;
+    decreaseHealth: (state, action: PayloadAction<{index: number, value: number}>) => {
+      if (state.pokemons[action.payload.index].health-action.payload.value >= 0) {
+          state.pokemons[action.payload.index].health-=action.payload.value;
       }
       else {
         state.pokemons[action.payload.index].health=0;

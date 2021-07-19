@@ -54,3 +54,15 @@ export interface PokemonDetailsType {
   type: string;
   baseExperience: number;
 }
+
+export interface FightingPokemon {
+    name: string,
+    prevHealth: number;
+    health: number,
+    maxHealth: number,
+    types: string[],
+    attacks: {
+      special: {damage: number, name: string;}[],
+      fast: {damage: number, name: string;}[]
+    }
+}

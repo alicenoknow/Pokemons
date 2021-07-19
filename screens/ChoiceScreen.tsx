@@ -16,7 +16,6 @@ export default function ChoiceScreen(props: ChoiceScreenProps): ReactElement {
     const addPokemons = (newPokemons: ReadonlyArray<PokemonInfo>) => { setPokemons([...pokemons, ...newPokemons]) }    
 
     React.useEffect(() => { loadPokemonBatch(addPokemons, url, setUrl) }, []);
-    console.log("infex ", props.route.params.index)
     const renderPokemon = (pokemonObject: PokemonInfo) => {
         return (
         <PokemonChoiceImage url={pokemonObject.url} name={pokemonObject.name} nameToRender={pokemonObject.name} index={props.route.params.index} />

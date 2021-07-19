@@ -22,10 +22,12 @@ export default function PokemonChoiceImage(props: PokemonImageProps): ReactEleme
   const navigation = useNavigation();
 
   const onPress = useCallback(() => {
-    console.log(loading, error, data)
+
     if (data) {
       const pokemonHealth = data.pokemon.maxHP;
-      dispatch(fightSlice.actions.setPokemon({pokemon: {name: props.name, health: pokemonHealth, maxHealth: pokemonHealth}, index: index}));
+      const types = data.pokemon.types;
+      const attacks = data.pokemon.attacks;
+      dispatch(fightSlice.actions.setPokemon({pokemon: {name: props.name, prevHealth: 0, health: pokemonHealth, maxHealth: pokemonHealth, types: types, attacks: attacks}, index: index}));
       navigation.navigate('TabFourScreen', {});
     }
     
@@ -46,6 +48,17 @@ const pokemonQuery = gql`
     query Pokemon($name:String) {
         pokemon: pokemon(name: $name) {
             maxHP
+            types
+            attacks {
+              fast {
+                damage
+                name
+              }
+              special {
+                damage
+                name
+              }
+            }
         }
     }`
 

@@ -5,7 +5,7 @@ import { View,  StyleSheet, Text } from 'react-native';
 import { getPokemonDetails } from '../utlis/api';
 import { useAppSelector } from '../utlis/store';
 import ChangeButton from './ChangeButton';
-import ChangeLife from './ChangeLife';
+import Attack from './AttackButton';
 import HealthBar from './HealthBar';
 import PokemonImage from './PokemonImage';
 
@@ -14,7 +14,7 @@ import PokemonImage from './PokemonImage';
 export default function FightingPokemon(props: {index: number}): ReactElement {
 
     const fighters = useAppSelector(state => state.fighters);
-    const { name, health, maxHealth } = fighters.pokemons[props.index]
+    const { name, health, maxHealth, attacks, types } = fighters.pokemons[props.index]
     const [url, setUrl] = useState('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png');
 
     useEffect(() => {
@@ -29,12 +29,25 @@ export default function FightingPokemon(props: {index: number}): ReactElement {
     getUrl();
     }, [fighters]);
 
+    const getSpecial = (index: number) => {
+      if (attacks.special.length >= index - 1) {
+        return (<Attack index={props.index} attack={attacks.special[index].name} damage={attacks.special[index].damage} types={types} />);
+      }
+    }
+    const getFast = (index: number) => {
+      if (attacks.fast.length >= index - 1) {
+        return (<Attack index={props.index} attack={attacks.fast[index].name} damage={attacks.fast[index].damage} types={types} />);
+      }
+    }
+
   return (
       <View style={styles.container}>
           <ChangeButton index={props.index} />
           <View style={styles.plusMinus}>
-            <ChangeLife symbol="+" index={props.index} color="#7f5c" />
-            <ChangeLife symbol="-" index={props.index} color="#ff3300" />
+            {getSpecial(0)}
+            {getSpecial(1)}
+            {getFast(0)}
+            {getFast(1)}
           </View>
           <View style={styles.health}>
             <HealthBar health={health} maxHealth={maxHealth} />
