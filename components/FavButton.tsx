@@ -12,7 +12,10 @@ interface FavButtonProps {
 
 export default function FindPokemon(props: FavButtonProps) {
 
+  // Context
   // const { pokemons, addPokemon, removePokemon } = useFavContext();
+
+  // Redux
   const pokemons = useAppSelector(state => state.pokemons.value);
   const dispatch = useAppDispatch()
 

@@ -2,7 +2,7 @@ import MapView, { KmlMapEvent, LatLng, MapEvent, Marker } from 'react-native-map
 import { StyleSheet, Text, View, Dimensions, LayoutAnimationTypes } from 'react-native';
 import React, { BaseSyntheticEvent, createRef, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import PikachuSprite from './PikachuMap';
+import PikachuSprite from './PikachuSprite';
 
 const screen = Dimensions.get('window');
 const LATITUDE_DELTA = 0.2;
@@ -95,7 +95,7 @@ export default function Map() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     map: {
         flex: 5,

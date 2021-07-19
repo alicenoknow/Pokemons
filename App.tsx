@@ -4,7 +4,6 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import {FavsContextProvider} from './components/FavsContext'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
@@ -19,7 +18,6 @@ const client = new ApolloClient({
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
 
   if (!isLoadingComplete) {
     return null;
@@ -29,7 +27,7 @@ export default function App() {
         <ApolloProvider client={client}>
           <FavsContextProvider>
             <SafeAreaProvider>
-              <Navigation colorScheme={colorScheme} />
+              <Navigation />
               <StatusBar />
             </SafeAreaProvider>
           </FavsContextProvider>

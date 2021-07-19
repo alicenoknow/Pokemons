@@ -65,15 +65,6 @@ const styles = StyleSheet.create({
     color: '#420',
     margin: 15,
   },
-  separator: {
-    height: 1,
-    width: 250,
-    backgroundColor: "#3337"
-  },
-  upperContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
   animationContainer: {
     justifyContent: 'center',
     alignItems: 'center',

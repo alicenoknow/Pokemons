@@ -6,14 +6,20 @@ import { PokemonInfo } from '../types';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Map from './Map';
-import { useAppSelector } from '../utlis/store';
+import { useAppDispatch, useAppSelector } from '../utlis/store';
+import { initialStorage } from '../utlis/storage';
+import { favSlice } from './FavsRedux';
 
 export default function FavsList() {
 
   const [pokemonObjects, setPokemonObjects] = useState<PokemonInfo[]>([]);
+
+  // Context
   // const { pokemons } = useFavContext();
 
+  // Redux
   const pokemons = useAppSelector(state => state.pokemons.value);
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     async function loadPokemonObjects() {
@@ -25,7 +31,16 @@ export default function FavsList() {
     loadPokemonObjects();
   }, [pokemons])
 
+  useEffect(() => {
+    async function initPokemons() {
+      const pokemonInitial = await initialStorage();
+      dispatch(favSlice.actions.initPokemons(pokemonInitial));
+    }
+    initPokemons();
+  }, [])
+
   return (
+    <View style={styles.container}>
       <FlatList 
         contentContainerStyle={{flex: 1}}
         data={pokemonObjects}
@@ -34,6 +49,7 @@ export default function FavsList() {
         ItemSeparatorComponent={renderSeparator}
         ListEmptyComponent={Map}
       />
+    </View>
   );
 }
 
@@ -53,7 +69,8 @@ const styles = StyleSheet.create({
   separator: {
     height: 1,
     width: 250,
-    backgroundColor: "#3337"
+    marginLeft: 'auto',
+    marginRight: 'auto', 
   },
   text: {
     margin: 50,
@@ -61,5 +78,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: 'pink',
+    alignContent: 'center',
   }
 });
