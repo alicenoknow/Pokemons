@@ -2,10 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import favReducer from '../components/FavsRedux'
+import fightReducer from '../components/FightRedux'
+
 
 const store = configureStore({
   reducer: {
-    pokemons: favReducer
+    pokemons: favReducer,
+    fighters: fightReducer
   }
 })
 

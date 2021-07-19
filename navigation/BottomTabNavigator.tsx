@@ -14,9 +14,11 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList, } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList, TabFourParamList, } from '../types';
 import DetailsScreen from '../screens/DetailsScreen';
 import { ReactElement } from 'react';
+import TabFourScreen from '../screens/TabFourScreen';
+import ChoiceScreen from '../screens/ChoiceScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -44,6 +46,13 @@ export default function BottomTabNavigator(): ReactElement {
       <BottomTab.Screen
         name="Favs"
         component={TabThreeNavigator}
+        options={{
+          tabBarIcon: setIcon,
+        }}
+      />
+      <BottomTab.Screen
+        name="Fight"
+        component={TabFourNavigator}
         options={{
           tabBarIcon: setIcon,
         }}
@@ -121,5 +130,29 @@ function TabThreeNavigator() {
         options={{ headerTitle: 'Details' }}
       />
     </TabThreeStack.Navigator>
+  );
+}
+
+const TabFourStack = createStackNavigator<TabFourParamList>();
+
+function TabFourNavigator() {
+  return (
+    <TabFourStack.Navigator>
+      <TabFourStack.Screen
+        name="TabFourScreen"
+        component={TabFourScreen}
+        options={{ headerTitle: 'Fight' }}
+      />
+      <TabFourStack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{ headerTitle: 'Details' }}
+      />
+      <TabFourStack.Screen
+        name="ChoiceScreen"
+        component={ChoiceScreen}
+        options={{ headerTitle: 'Choose your pokemon' }}
+      />
+    </TabFourStack.Navigator>
   );
 }

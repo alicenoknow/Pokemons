@@ -12,6 +12,7 @@ export type BottomTabParamList = {
   Find: undefined;
   Browse: undefined;
   Favs: undefined;
+  Fight: undefined;
 };
 
 export type TabOneParamList = {
@@ -26,6 +27,12 @@ export type TabTwoParamList = {
 
 export type TabThreeParamList = {
   TabThreeScreen: undefined;
+  DetailsScreen: undefined;
+};
+
+export type TabFourParamList = {
+  TabFourScreen: undefined;
+  ChoiceScreen: undefined;
   DetailsScreen: undefined;
 };
 
