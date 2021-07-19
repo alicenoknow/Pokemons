@@ -7,7 +7,7 @@ const FavContext = createContext<{ pokemons: string[], addPokemon: (pokemon: str
 
 export const useFavContext = () => useContext(FavContext);
 
-export const FavsContextProvider: React.FunctionComponent = ({ children }) => {
+export const FavsContextProvider = ({ children }) => {
   const [pokemons, setPokemons] = useState<string[]>([]);
 
   const addPokemon = async (pokemon: string) => {

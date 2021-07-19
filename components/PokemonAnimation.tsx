@@ -10,31 +10,30 @@ interface AnimationProps {
   size: number
 }
 
-const PokemonAnimation = React.forwardRef<LottieView, AnimationProps>((props, ref) => {
-
-  function onPress() {
-    if(ref && 'current' in ref) {
-      const anim = ref.current;
-      if (anim) {
-        anim.reset();
-        anim.play();
+const PokemonAnimation = React.forwardRef<LottieView, AnimationProps>(
+  function RefFunc(props: AnimationProps, ref) {
+    function onPress() {
+      if(ref && 'current' in ref) {
+        const anim = ref.current;
+        if (anim) {
+          anim.reset();
+          anim.play();
+        }
       }
     }
-  }
-
-  return (
-    <TouchableOpacity
-      onPress={onPress}>
-      <LottieView
-        ref={ref}
-        source={props.source}
-        loop={false}
-        style={{
-          width: props.size,
-          height: props.size,
-          transform: [{ rotate: props.rotation }],
-        }}
-        autoPlay={true} />
-    </TouchableOpacity>
-  );
+    return (
+      <TouchableOpacity
+        onPress={onPress}>
+        <LottieView
+          ref={ref}
+          source={props.source}
+          loop={false}
+          style={{
+            width: props.size,
+            height: props.size,
+            transform: [{ rotate: props.rotation }],
+          }}
+          autoPlay={true} />
+      </TouchableOpacity>
+    );
 })

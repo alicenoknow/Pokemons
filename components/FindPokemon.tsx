@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { PokemonDetailsType } from '../types';
 
 type imageUrlCallback = (pokemonImageUrl: string) => void;

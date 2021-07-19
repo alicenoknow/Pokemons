@@ -1,4 +1,4 @@
-import React, { createRef, RefObject, useState } from 'react';
+import React, { createRef, RefObject } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useEffect } from 'react';
 import { PokemonAnimation } from './PokemonAnimation';
@@ -16,7 +16,7 @@ interface AnimationProps {
 const REFS_NUM = 9;
 
 export const NotFoundAnimation = (props: AnimationProps) => {
-  const elRefs: RefObject<LottieView>[] = (Array(REFS_NUM).fill(null).map((_, i) => createRef()));
+  const elRefs: RefObject<LottieView>[] = (Array(REFS_NUM).fill(null).map(() => createRef()));
 
   useEffect(() => {
     if (!props.clicked) {
