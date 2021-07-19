@@ -1,9 +1,6 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { State } from 'react-native-gesture-handler';
-import store, { useAppDispatch, useAppSelector } from '../utlis/store';
-import { useFavContext } from './FavsContext';
+import { useAppDispatch, useAppSelector } from '../utlis/store';
 import { favSlice } from './FavsRedux';
 
 interface FavButtonProps {

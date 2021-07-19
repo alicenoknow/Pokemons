@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 import { PokemonAnimation } from './PokemonAnimation';
 import LottieView from 'lottie-react-native';
 
+const pikachuImage = require('../assets/animations/pikachu.json');
+const diglettImage = require('../assets/animations/diglett.json');
+const squirtleImage = require('../assets/animations/squirtle.json');
+
 interface AnimationProps {
   clicked: boolean | undefined;
   setClicked: ((click: boolean) => void) | undefined;
 }
-
-const pikachuImage = require('../assets/animations/pikachu.json');
-const diglettImage = require('../assets/animations/diglett.json');
-const squirtleImage = require('../assets/animations/squirtle.json');
 
 const REFS_NUM = 9;
 

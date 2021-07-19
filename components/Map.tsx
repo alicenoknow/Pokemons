@@ -1,6 +1,6 @@
-import MapView, { KmlMapEvent, LatLng, MapEvent, Marker } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions, LayoutAnimationTypes } from 'react-native';
-import React, { BaseSyntheticEvent, createRef, useState } from 'react';
+import MapView, { LatLng, MapEvent, Marker } from 'react-native-maps';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { createRef, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import PikachuSprite from './PikachuSprite';
 
@@ -24,7 +24,7 @@ const Direction = {
     }
 }
 
-export const getSteps = (prevCoordinates: LatLng, newCoordinates: LatLng, steps: number) => {
+export const getSteps = (prevCoordinates: LatLng, newCoordinates: LatLng, steps: number): LatLng[] => {
     const dLat= (newCoordinates.latitude - prevCoordinates.latitude) / steps;
     const dLon = (newCoordinates.longitude - prevCoordinates.longitude) / steps;
     return Array(steps).fill(null).map((_, i) => {return {latitude: prevCoordinates.latitude + (i+1) * dLat, longitude: prevCoordinates.longitude + (i+1) * dLon}});

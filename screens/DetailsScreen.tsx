@@ -2,7 +2,6 @@ import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import PokemonDetails from '../components/PokemonDetails';
 import { RouteProp } from '@react-navigation/native';
-import query from '../components/Query';
 
 interface DetailsScreenProps {
   route: RouteProp<{ params: { name: string } }, 'params'>;

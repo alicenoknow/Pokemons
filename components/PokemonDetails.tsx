@@ -7,22 +7,6 @@ interface PokemonDetailsProps {
   name: string;
 }
 
-interface PokemonDetailsGQL {
-  name: string;
-  weight: {
-    minimum: string;
-    maximum: string;
-  }
-  height: {
-    minimum: string;
-    maximum: string;
-  }
-  classification: string;
-  types: string[];
-  image: string;
-  weaknesses: string[];
-}
-
 const pokemonQuery = gql`
           query Pokemon($name:String) {
               pokemon: pokemon(name: $name) {

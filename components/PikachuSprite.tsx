@@ -1,5 +1,5 @@
-import { StyleSheet, Image, Animated, Easing } from 'react-native';
-import React, { useRef } from 'react';
+import { StyleSheet, Animated, Easing } from 'react-native';
+import React from 'react';
 
 const pikachuImage = require('../assets/images/pik.png');
 
@@ -10,9 +10,7 @@ interface PikachuProps {
 
 export default function PikachuSprite(props: PikachuProps) {
 
-    const scaleAnim = useRef(new Animated.Value(1)).current
-
-    var spinValue = new Animated.Value(0);
+    const spinValue = new Animated.Value(0);
 
     Animated.timing(
         spinValue,
