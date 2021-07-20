@@ -23,21 +23,21 @@ export default function GameOverScreen(props: GameOverScreenProps): ReactElement
                   {
                       toValue: 1,
                       duration: 800,
-                      useNativeDriver: false
+                      useNativeDriver: true
                   }),
             Animated.timing(
                 xScaleVal,
                 {
                     toValue: 1,
                     duration: 800,
-                    useNativeDriver: false
+                    useNativeDriver: true
                 }),
             Animated.timing(
                 yScaleVal,
                 {
                     toValue: 1,
                     duration: 800,
-                    useNativeDriver: false
+                    useNativeDriver: true
                 }),
         ]).start()
     }, []);
