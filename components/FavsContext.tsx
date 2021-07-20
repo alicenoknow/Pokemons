@@ -9,10 +9,10 @@ interface FavContextType {
   removePokemon: (pokemon: string) => void;
 }
 
-const FavContext = createContext<FavContextType>({ pokemons: [], addPokemon: () => ({ }), removePokemon: () => ({ }) });
+const FavContext = createContext<FavContextType>({ pokemons: [], addPokemon: () => ({}), removePokemon: () => ({}) });
 export const useFavContext = (): FavContextType => useContext(FavContext);
 
-export const FavsContextProvider = (props: {children: ReactNode}): ReactElement => {
+export const FavsContextProvider = (props: { children: ReactNode }): ReactElement => {
   const { children } = props;
   const [pokemons, setPokemons] = useState<string[]>([]);
 

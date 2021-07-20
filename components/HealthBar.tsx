@@ -1,37 +1,47 @@
-import React from 'react';
-
-import { ReactElement } from 'react';
-import { StyleSheet, Animated, Easing } from 'react-native';
-import { useAppSelector } from '../utlis/store';
+import React, { useEffect, useRef, ReactElement } from 'react';
+import { StyleSheet, Animated } from 'react-native';
 
 
-export default function HealthBar(props: {health: number, maxHealth: number}): ReactElement {
+export default function HealthBar(props: { health: number, maxHealth: number }): ReactElement {
 
-  const fighters = useAppSelector(state => state.fighters);
-  const widthValue = new Animated.Value(0);
+  const widthValue = useRef(new Animated.Value(0)).current;
+  const colorValue = useRef(new Animated.Value(0)).current;
 
-  Animated.timing(
-    widthValue,
-    {
-        toValue: 1,
-        duration: 300,
+
+  useEffect(() => {
+    Animated.timing(
+      widthValue,
+      {
+        toValue: props.health / props.maxHealth,
+        duration: 700,
         useNativeDriver: false
-    }
-    ).start()
+      }).start()
+    Animated.timing(
+      colorValue,
+      {
+        toValue: props.health / props.maxHealth,
+        duration: 700,
+        useNativeDriver: false
+      }).start()
+  }, [props.health])
 
-const span = widthValue.interpolate({
-inputRange: [0, 1],
-outputRange: [(props.health * 60 / props.maxHealth) + '%' , (props.health * 80 / props.maxHealth) + '%']
-})
+  const widthSpan = widthValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0%', '80%']
+  })
+
+  const colorSpan = colorValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["rgb(255,70,60)", "rgb(100,255,109)"]
+  })
 
   return (
-        <Animated.View style={{width: span,  ...styles.health}}></Animated.View>
+    <Animated.View style={{ width: widthSpan, backgroundColor: colorSpan, ...styles.health }}></Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   health: {
-    backgroundColor: '#00cc00', 
     height: 20,
     borderRadius: 10
   }

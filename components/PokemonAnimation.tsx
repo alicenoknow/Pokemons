@@ -13,7 +13,7 @@ interface AnimationProps {
 const PokemonAnimation = React.forwardRef<LottieView, AnimationProps>(
   function RefFunc(props: AnimationProps, ref) {
     function onPress() {
-      if(ref && 'current' in ref) {
+      if (ref && 'current' in ref) {
         const anim = ref.current;
         if (anim) {
           anim.reset();
@@ -36,4 +36,4 @@ const PokemonAnimation = React.forwardRef<LottieView, AnimationProps>(
           autoPlay={true} />
       </TouchableOpacity>
     );
-})
+  })

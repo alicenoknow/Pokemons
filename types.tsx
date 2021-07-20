@@ -34,6 +34,7 @@ export type TabFourParamList = {
   TabFourScreen: undefined;
   ChoiceScreen: undefined;
   DetailsScreen: undefined;
+  GameOverScreen: undefined;
 };
 
 export interface PokemonJSONType {
@@ -56,13 +57,13 @@ export interface PokemonDetailsType {
 }
 
 export interface FightingPokemon {
-    name: string,
-    prevHealth: number;
-    health: number,
-    maxHealth: number,
-    types: string[],
-    attacks: {
-      special: {damage: number, name: string;}[],
-      fast: {damage: number, name: string;}[]
-    }
+  name: string,
+  prevHealth: number;
+  health: number,
+  maxHealth: number,
+  types: string[],
+  attacks: {
+    special: { damage: number, name: string; }[],
+    fast: { damage: number, name: string; }[]
+  }
 }

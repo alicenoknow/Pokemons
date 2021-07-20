@@ -15,22 +15,22 @@ export default function PikachuSprite(props: PikachuProps): ReactElement {
 
     Animated.timing(
         spinValue,
-    {
-        toValue: 1,
-        duration: 2000,
-        easing: Easing.linear,
-        useNativeDriver: true
-    }
+        {
+            toValue: 1,
+            duration: 2000,
+            easing: Easing.linear,
+            useNativeDriver: true
+        }
     ).start()
 
-const spin = spinValue.interpolate({
-  inputRange: [0, 1],
-  outputRange: ['0deg', '360deg']
-})
-    
+    const spin = spinValue.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '360deg']
+    })
+
 
     return (
-        <Animated.Image style={{...styles.img, transform: [{ rotate: spin }, { scaleX: props.scale }]}} source={pikachuImage} />
+        <Animated.Image style={{ ...styles.img, transform: [{ rotate: spin }, { scaleX: props.scale }] }} source={pikachuImage} />
     );
 }
 

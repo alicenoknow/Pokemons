@@ -23,22 +23,22 @@ export default function PokemonImage(props: PokemonImageProps): ReactElement {
   const getContent = () => {
     if (props.url !== '') {
       return (
-          <TouchableOpacity
-            onPress={onPress}>
-            <Text style={styles.name}>{props.nameToRender}</Text>
-            <Image
-              style={styles.pokemon}
-              source={{ uri: props.url }} />
-          </TouchableOpacity>);
+        <TouchableOpacity
+          onPress={onPress}>
+          <Text style={styles.name}>{props.nameToRender}</Text>
+          <Image
+            style={styles.pokemon}
+            source={{ uri: props.url }} />
+        </TouchableOpacity>);
     }
     else {
       return (
-          <>
-            <View style={styles.animationContainer}>
-              <NotFoundAnimation clicked={props.clicked} setClicked={props.setClick} />
-            </View>
-            <Text style={styles.name} >Pokemon {props.name} does not exist :c</Text>
-          </>);
+        <>
+          <View style={styles.animationContainer}>
+            <NotFoundAnimation clicked={props.clicked} setClicked={props.setClick} />
+          </View>
+          <Text style={styles.name} >Pokemon {props.name} does not exist :c</Text>
+        </>);
     }
   }
   return (
@@ -48,16 +48,14 @@ export default function PokemonImage(props: PokemonImageProps): ReactElement {
   );
 }
 
-
-
 const styles = StyleSheet.create({
   mainContainer: {
     alignItems: 'center',
     justifyContent: 'center'
   },
   pokemon: {
-    width: 180,
-    height: 180,
+    width: 170,
+    height: 170,
   },
   name: {
     fontSize: 16,

@@ -54,7 +54,7 @@ export const NotFoundAnimation = (props: AnimationProps): ReactElement => {
       </View>
     </>
   );
-  }
+}
 
 const styles = StyleSheet.create({
   row1: {

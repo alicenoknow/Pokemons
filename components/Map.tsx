@@ -26,9 +26,9 @@ const Direction = {
 }
 
 export const getSteps = (prevCoordinates: LatLng, newCoordinates: LatLng, steps: number): LatLng[] => {
-    const dLat= (newCoordinates.latitude - prevCoordinates.latitude) / steps;
+    const dLat = (newCoordinates.latitude - prevCoordinates.latitude) / steps;
     const dLon = (newCoordinates.longitude - prevCoordinates.longitude) / steps;
-    return Array(steps).fill(null).map((_, i) => {return {latitude: prevCoordinates.latitude + (i+1) * dLat, longitude: prevCoordinates.longitude + (i+1) * dLon}});
+    return Array(steps).fill(null).map((_, i) => { return { latitude: prevCoordinates.latitude + (i + 1) * dLat, longitude: prevCoordinates.longitude + (i + 1) * dLon } });
 }
 
 export default function Map(): ReactElement {
@@ -45,8 +45,8 @@ export default function Map(): ReactElement {
 
     const animateGoTo = (nextCoordinates: LatLng) => {
         map.current?.animateCamera({
-            center: {latitude: nextCoordinates.latitude, longitude: nextCoordinates.longitude}
-        }, {duration: 1000});
+            center: { latitude: nextCoordinates.latitude, longitude: nextCoordinates.longitude }
+        }, { duration: 1000 });
         setDirection(findDirection(currentCoordinates, nextCoordinates))
         setCurr(nextCoordinates);
     }
@@ -115,8 +115,8 @@ const styles = StyleSheet.create({
         padding: 40
     },
     marker: {
-        padding: 20, 
-        alignItems: 'center', 
+        padding: 20,
+        alignItems: 'center',
         justifyContent: 'center'
     }
 });

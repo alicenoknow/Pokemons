@@ -41,8 +41,8 @@ export default function FavsList(): ReactElement {
 
   return (
     <View style={styles.container}>
-      <FlatList 
-        contentContainerStyle={{flex: 1}}
+      <FlatList
+        contentContainerStyle={{ flex: 1 }}
         data={pokemonObjects}
         renderItem={({ item }) => renderPokemon(item)}
         keyExtractor={item => item.name}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     height: 1,
     width: 250,
     marginLeft: 'auto',
-    marginRight: 'auto', 
+    marginRight: 'auto',
   },
   text: {
     margin: 50,

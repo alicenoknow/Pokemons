@@ -19,6 +19,7 @@ import DetailsScreen from '../screens/DetailsScreen';
 import { ReactElement } from 'react';
 import TabFourScreen from '../screens/TabFourScreen';
 import ChoiceScreen from '../screens/ChoiceScreen';
+import GameOverScreen from '../screens/GameOverScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -28,6 +29,7 @@ export default function BottomTabNavigator(): ReactElement {
   return (
     <BottomTab.Navigator
       initialRouteName="Browse"
+
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
         name="Find"
@@ -152,6 +154,11 @@ function TabFourNavigator() {
         name="ChoiceScreen"
         component={ChoiceScreen}
         options={{ headerTitle: 'Choose your pokemon' }}
+      />
+       <TabFourStack.Screen
+        name="GameOverScreen"
+        component={GameOverScreen}
+        options={{ headerTitle: 'Game over' }}
       />
     </TabFourStack.Navigator>
   );

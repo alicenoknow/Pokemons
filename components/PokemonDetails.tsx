@@ -30,7 +30,7 @@ const pokemonQuery = gql`
 export default function PokemonDetails(props: PokemonDetailsProps): ReactElement {
 
   const { name } = props;
-  const { loading, error, data } = useQuery(pokemonQuery, { variables: { name }, fetchPolicy: "cache-first"});
+  const { loading, error, data } = useQuery(pokemonQuery, { variables: { name }, fetchPolicy: "cache-first" });
 
   // REST API
   // const [details, setDetails] = useState<PokemonDetailsType | null>(null);
@@ -46,7 +46,7 @@ export default function PokemonDetails(props: PokemonDetailsProps): ReactElement
   //         setPokemonDetails();
   //     }
   // }, [])
-  
+
   if (loading) {
     return <View><ActivityIndicator /></View>
   }
