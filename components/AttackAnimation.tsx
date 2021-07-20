@@ -32,21 +32,22 @@ export default function AttackAnimation(): ReactElement {
                     opacityValue,
                     {
                         toValue: 1,
-                        duration: 200,
+                        duration: 100,
                         useNativeDriver: false
                     }),
-                Animated.timing(
+                Animated.spring(
                     yValue,
                     {
                         toValue: to,
-                        duration: 550,
+                        velocity: 3,
+                        friction: 5,
                         useNativeDriver: false
                     }),
                 Animated.timing(
                     opacityValue,
                     {
                         toValue: 0,
-                        duration: 200,
+                        duration: 100,
                         useNativeDriver: false
                     }),
             ]).start(() => { dispatch(fightSlice.actions.endAttack()); });
