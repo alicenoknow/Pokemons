@@ -17,24 +17,23 @@ interface PokemonImageProps {
 export default function PokemonChoiceImage(props: PokemonImageProps): ReactElement {
 
   const { name, url, index, nameToRender } = props;
+  const { loading, data } = useQuery(pokemonQuery, { variables: { name } });
   const dispatch = useAppDispatch()
-  const { data } = useQuery(pokemonQuery, { variables: { name } });
   const navigation = useNavigation();
 
   const onPress = useCallback(() => {
-
-    if (data) {
-      const pokemonHealth = data.pokemon.maxHP;
-      const types = data.pokemon.types;
-      const attacks = data.pokemon.attacks;
-      dispatch(fightSlice.actions.setPokemon({ pokemon: { name: props.name, prevHealth: 0, health: pokemonHealth, maxHealth: pokemonHealth, types: types, attacks: attacks }, index: index }));
-      navigation.navigate('TabFourScreen', {});
-    }
-
-  }, [props.name])
+      if (data) {
+        const pokemonHealth = data.pokemon.maxHP;
+        const types = data.pokemon.types;
+        const attacks = data.pokemon.attacks;
+        dispatch(fightSlice.actions.setPokemon({ pokemon: { name: props.name, prevHealth: 0, health: pokemonHealth, maxHealth: pokemonHealth, types: types, attacks: attacks }, index: index }));
+        navigation.navigate('TabFourScreen', {});
+        return;
+      }
+  }, [props.name, data])
 
   return (
-    <TouchableOpacity
+    <TouchableOpacity disabled={loading}
       onPress={onPress}>
       <Text style={styles.name}>{nameToRender}</Text>
       <Image
