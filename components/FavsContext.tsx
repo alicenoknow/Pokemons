@@ -1,7 +1,14 @@
-import React, { createContext, ReactElement, ReactNode, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Alert } from "react-native";
-import { getPokmeonInfoFromName } from "../utlis/api";
-import { updateStorage, initialStorage } from "../utlis/storage";
+import { getPokmeonInfoFromName } from "../utils/api";
+import { updateStorage, initialStorage } from "../utils/storage";
 
 interface FavContextType {
   pokemons: string[];
@@ -9,16 +16,22 @@ interface FavContextType {
   removePokemon: (pokemon: string) => void;
 }
 
-const FavContext = createContext<FavContextType>({ pokemons: [], addPokemon: () => ({}), removePokemon: () => ({}) });
+const FavContext = createContext<FavContextType>({
+  pokemons: [],
+  addPokemon: () => ({}),
+  removePokemon: () => ({}),
+});
 export const useFavContext = (): FavContextType => useContext(FavContext);
 
-export const FavsContextProvider = (props: { children: ReactNode }): ReactElement => {
+export const FavsContextProvider = (props: {
+  children: ReactNode;
+}): ReactElement => {
   const { children } = props;
   const [pokemons, setPokemons] = useState<string[]>([]);
 
   const addPokemon = async (pokemon: string) => {
     if (pokemons.includes(pokemon)) {
-      Alert.alert(pokemon + ' already in your favs');
+      Alert.alert(pokemon + " already in your favs");
       return;
     }
     const checkInfo = await getPokmeonInfoFromName(pokemon);
@@ -26,18 +39,18 @@ export const FavsContextProvider = (props: { children: ReactNode }): ReactElemen
       const newPokemons = [...pokemons, pokemon];
       setPokemons(newPokemons);
       updateStorage(newPokemons);
-      Alert.alert(pokemon + ' added to your favs');
+      Alert.alert(pokemon + " added to your favs");
     }
-  }
+  };
 
   const removePokemon = (pokemon: string) => {
     if (pokemons.includes(pokemon)) {
-      const newPokemons = pokemons.filter(p => p !== pokemon)
+      const newPokemons = pokemons.filter((p) => p !== pokemon);
       setPokemons(newPokemons);
       updateStorage(newPokemons);
-      Alert.alert(pokemon + ' removed from your favs');
+      Alert.alert(pokemon + " removed from your favs");
     }
-  }
+  };
 
   useEffect(() => {
     async function loadPokemons() {
@@ -45,7 +58,7 @@ export const FavsContextProvider = (props: { children: ReactNode }): ReactElemen
       setPokemons(pokemons);
     }
     loadPokemons();
-  }, [])
+  }, []);
 
   return (
     <FavContext.Provider value={{ pokemons, addPokemon, removePokemon }}>
@@ -53,4 +66,3 @@ export const FavsContextProvider = (props: { children: ReactNode }): ReactElemen
     </FavContext.Provider>
   );
 };
-

@@ -1,47 +1,47 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Alert } from 'react-native';
-import { updateStorage } from '../utlis/storage'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Alert } from "react-native";
+import { updateStorage } from "../utils/storage";
 
 interface FavState {
   value: string[];
 }
 
 const initialState: FavState = {
-  value: []
-}
+  value: [],
+};
 
 export const favSlice = createSlice({
-  name: 'pokemons',
+  name: "pokemons",
   initialState,
   reducers: {
     initPokemons: (state, action: PayloadAction<string[]>) => {
-      state.value = action.payload
+      state.value = action.payload;
     },
     addPokemon: (state, action: PayloadAction<string>) => {
       const pokemon = action.payload;
 
       if (state.value.includes(pokemon)) {
-        Alert.alert(pokemon + ' already in your favs');
+        Alert.alert(pokemon + " already in your favs");
         return;
       }
       const newPokemons = [...state.value, pokemon];
       updateStorage(newPokemons);
-      Alert.alert(pokemon + ' added to your favs');
+      Alert.alert(pokemon + " added to your favs");
       state.value = newPokemons;
     },
     removePokemon: (state, action: PayloadAction<string>) => {
       const pokemon = action.payload;
 
       if (state.value.includes(pokemon)) {
-        const newPokemons = state.value.filter(p => p !== pokemon);
+        const newPokemons = state.value.filter((p) => p !== pokemon);
         updateStorage(newPokemons);
-        Alert.alert(pokemon + ' removed from your favs');
+        Alert.alert(pokemon + " removed from your favs");
         state.value = newPokemons;
       }
     },
-  }
-})
+  },
+});
 
-export const { addPokemon, removePokemon, initPokemons } = favSlice.actions
+export const { addPokemon, removePokemon, initPokemons } = favSlice.actions;
 
-export default favSlice.reducer
+export default favSlice.reducer;

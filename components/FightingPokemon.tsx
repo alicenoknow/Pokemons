@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { ReactElement } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { getPokemonDetails } from '../utlis/api';
-import { useAppSelector } from '../utlis/store';
-import ChangeButton from './ChangeButton';
-import Attack from './AttackButton';
-import HealthBar from './HealthBar';
-import PokemonImage from './PokemonImage';
+import { ReactElement } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { getPokemonDetails } from "../utils/api";
+import { useAppSelector } from "../utils/store";
+import ChangeButton from "./ChangeButton";
+import Attack from "./AttackButton";
+import HealthBar from "./HealthBar";
+import PokemonImage from "./PokemonImage";
 
-
-export default function FightingPokemon(props: { index: number }): ReactElement {
-
-  const fighters = useAppSelector(state => state.fighters);
-  const { name, health, maxHealth, attacks, types } = fighters.pokemons[props.index]
-  const [url, setUrl] = useState('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png');
+export default function FightingPokemon(props: {
+  index: number;
+}): ReactElement {
+  const fighters = useAppSelector((state) => state.fighters);
+  const { name, health, maxHealth, attacks, types } =
+    fighters.pokemons[props.index];
+  const [url, setUrl] = useState(
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/quick-ball.png"
+  );
 
   useEffect(() => {
     async function getUrl() {
@@ -30,14 +33,28 @@ export default function FightingPokemon(props: { index: number }): ReactElement 
 
   const getSpecial = (index: number) => {
     if (attacks.special.length >= index + 1) {
-      return (<Attack index={props.index} attack={attacks.special[index].name} damage={attacks.special[index].damage} types={types} />);
+      return (
+        <Attack
+          index={props.index}
+          attack={attacks.special[index].name}
+          damage={attacks.special[index].damage}
+          types={types}
+        />
+      );
     }
-  }
+  };
   const getFast = (index: number) => {
     if (attacks.fast.length >= index + 1) {
-      return (<Attack index={props.index} attack={attacks.fast[index].name} damage={attacks.fast[index].damage} types={types} />);
+      return (
+        <Attack
+          index={props.index}
+          attack={attacks.fast[index].name}
+          damage={attacks.fast[index].damage}
+          types={types}
+        />
+      );
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -59,18 +76,18 @@ export default function FightingPokemon(props: { index: number }): ReactElement 
 
 const styles = StyleSheet.create({
   buttons: {
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   health: {
-    flexDirection: 'row',
+    flexDirection: "row",
     margin: 5,
   },
   plusMinus: {
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
